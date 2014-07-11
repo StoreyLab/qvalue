@@ -1,0 +1,5 @@
+import(splines)
+export(empPvals, lfdr, pi0est, qvalue, qvalueIUI, qwrite)
+S3method(summary, qvalue)
+S3method(plot, qvalue)
+S3method(hist, qvalue)

@@ -1,0 +1,6 @@
+qvalue 1.99.0: 
+This update of the qvalue package includes:
+(i) the use of ggplot2 in the plotting functions
+(ii) an updated vignette
+(iii) vectorizing sections of the code 
+(iv) function name changes
