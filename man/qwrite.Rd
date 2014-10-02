@@ -32,6 +32,7 @@ data(hedenfalk)
 p <- hedenfalk$p
 
 # write q-value object
+ qobj <- qvalue(p)
 qwrite(qobj, file="myresults.txt")
 }
 \author{
