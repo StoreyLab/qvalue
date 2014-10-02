@@ -13,7 +13,7 @@
 #' will be utilized in the internal calls made in \code{\link{qvalue}}. See \url{http://genomine.org/papers/Storey_FDR_2011.pdf}
 #' for a brief introduction to FDRs and q-values.
 #'
-#' @param p A vector of p-values (only necessary input). If left NULL then \code{\link{qvalueIUI}} will begin.
+#' @param p A vector of p-values (only necessary input).
 #' @param fdr.level A level at which to control the FDR. Must be in (0,1]. Optional; if this is 
 #' selected, a vector of TRUE and FALSE is returned that specifies
 #' whether each q-value is less than fdr.level or not.
@@ -77,7 +77,6 @@
 #' @seealso \code{\link{pi0est}}, \code{\link{lfdr}}, \code{\link{summary.qvalue}}, 
 #' \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{qwrite}}
 #' @keywords qvalue
-#' @name hist
 #' @aliases qvalue
 #' @import splines
 #' @export

@@ -22,7 +22,7 @@
 #' p <- hedenfalk$p
 #'  
 #' # write q-value object
-#  qobj <- qvalue(p)
+#'  qobj <- qvalue(p)
 #' qwrite(qobj, file="myresults.txt")
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
 #' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{summary.qvalue}}

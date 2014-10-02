@@ -46,7 +46,7 @@
 #' qobj <- qvalue(p) 
 #' hist(qobj) 
 #' 
-#' @aliases hist, his.qvalue
+#' @aliases hist, hist.qvalue
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
 #' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{summary.qvalue}}
 #' @keywords histogram
