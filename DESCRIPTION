@@ -23,4 +23,3 @@ Suggests: ggplot2, gridExtra, knitr
 Depends: R(>= 2.10)
 URL: http://github.com/jdstorey/qvalue
 License: LGPL
-
