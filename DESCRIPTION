@@ -6,7 +6,8 @@ Date: 2015-03-24
 Authors@R: c(
     person("John", "Storey", email = "jstorey@princeton.edu", role = c("aut", "cre")),
     person("Andrew", "Bass", email = "ajbass@princeton.edu", role = c("aut","ctb")),
-    person("Alan", "Dabney", email = "adabney@stat.tamu.edu", role = "ctb")
+    person("Alan", "Dabney", email = "adabney@stat.tamu.edu", role = "ctb"),
+    person("David", "Robinson", email = "admiral.david@gmail.com", role = "ctb")
     )
 Maintainer: John D. Storey <jstorey@princeton.edu>
 biocViews: MultipleComparisons
