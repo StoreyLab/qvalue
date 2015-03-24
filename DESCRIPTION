@@ -1,8 +1,8 @@
 Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
-Version: 1.99.0
-Date: 2014-6-13
+Version: 1.5.1
+Date: 2015-03-24
 Author: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass
 Maintainer: John D. Storey <jstorey@princeton.edu>
 biocViews: MultipleComparisons
@@ -18,9 +18,8 @@ Description: This package takes a list of p-values resulting from the
         applied to problems in genomics, brain imaging, astrophysics,
         and data mining.
 VignetteBuilder: knitr
-Imports: splines
-Suggests: ggplot2, gridExtra, knitr
+Imports: splines, ggplot2, grid, reshape2
+Suggests: knitr
 Depends: R(>= 2.10)
-URL: http://github.com/jdstorey/qvalue
+URL: http://github.com/jdstorey/qvalue, http://qvalue.princeton.edu/
 License: LGPL
-

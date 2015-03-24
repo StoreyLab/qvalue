@@ -85,8 +85,6 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
   #     Lower-right: number of expected false positives versus number of
   #                  significant tests 
   # Initilizations
-  suppressMessages(require(ggplot2))
-  suppressMessages(require(gridExtra))
   plot.call <- match.call()
   q.ord <- x$qval[order(x$pval)]
   if (min(q.ord) > rng[2]) {
@@ -106,10 +104,11 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
     p1.smooth <- NULL
   } else {
     spi0.df <- data.frame(lambda = lambda, pi0 = pi0Smooth)
-    p1.smooth <- geom_line(data = spi0.df, aes(x = lambda, y = pi0), colour="red")
+    p1.smooth <- geom_line(data = spi0.df, aes_string(x = 'lambda', y = 'pi0'), 
+                           colour="red")
   }        
   # Subplots
-  p1 <-  ggplot(pi0.df, aes(x = lambda, y = pi0)) +
+  p1 <-  ggplot(pi0.df, aes_string(x = 'lambda', y = 'pi0')) +
                 geom_point() + 
                 p1.smooth +
                 geom_abline(intercept = pi00,
@@ -126,23 +125,22 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
                          parse = TRUE, size = 3)
   p2 <- ggplot(data.frame(pvalue = p.ord[q.ord >= rng[1] & q.ord <= rng[2]],
                           qvalue = q.ord[q.ord >= rng[1] & q.ord <= rng[2]]), 
-                          aes(x = pvalue, y = qvalue)) + 
+                          aes_string(x = 'pvalue', y = 'qvalue')) + 
                xlab("p-value") +
                ylab("q-value")  + 
                geom_line()
   p3 <- ggplot(data.frame(qCuttOff = q.ord[q.ord >= rng[1] & q.ord <= rng[2]],
                           sig=(1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])), 
-                          aes(x = qCuttOff, y = sig)) + 
+                          aes_string(x = 'qCuttOff', y = 'sig')) + 
                xlab("q-value cut-off") + 
                ylab("significant tests")  + 
                geom_line()
   p4 <- ggplot(data.frame(sig = (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2]),
                           expFP = q.ord[q.ord >= rng[1] & q.ord <= rng[2]] * 
                                 (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])),
-                          aes(x = sig, y = expFP)) + 
+                          aes_string(x = 'sig', y = 'expFP')) + 
                xlab("significant tests") + 
                ylab("expected false positives")  + 
                geom_line()
-  multPlot <- arrangeGrob(p1, p2, p3, p4)
-  return(print(multPlot))
+  multiplot(p1, p2, p3, p4, cols = 2)
 }

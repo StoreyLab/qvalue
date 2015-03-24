@@ -78,7 +78,7 @@
 #' \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{qwrite}}
 #' @keywords qvalue
 #' @aliases qvalue
-#' @import splines
+#' @import splines ggplot2 grid reshape2
 #' @export
 qvalue <- function(p = NULL, fdr.level = NULL, pfdr = FALSE, ...) {
   # Argument checks
