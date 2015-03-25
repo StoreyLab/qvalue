@@ -53,7 +53,7 @@
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass, Alan Dabney
 #' @keywords summary
 #' @aliases summary, summary.qvalue
-#' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{qwrite}}
+#' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{write.qvalue}}
 #' @export
 summary.qvalue <- function (object, cuts = c(0.0001, 0.001, 0.01, 0.025, 0.05, 0.10, 1), digits = getOption("digits"), ...) { 
   # Call

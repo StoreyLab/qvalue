@@ -75,7 +75,7 @@
 #' 
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
 #' @seealso \code{\link{pi0est}}, \code{\link{lfdr}}, \code{\link{summary.qvalue}}, 
-#' \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{qwrite}}
+#' \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{write.qvalue}}
 #' @keywords qvalue
 #' @aliases qvalue
 #' @import splines ggplot2 grid reshape2

@@ -86,7 +86,7 @@ Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of 
 }
 \seealso{
 \code{\link{pi0est}}, \code{\link{lfdr}}, \code{\link{summary.qvalue}},
-\code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{qwrite}}
+\code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{write.qvalue}}
 }
 \keyword{qvalue}
 
