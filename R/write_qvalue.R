@@ -30,8 +30,8 @@
 #' write.qvalue(qobj, file="myresults.txt")
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
 #' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{summary.qvalue}}
-#' @aliases write
-#' @keywords write
+#' @aliases write.qvalue
+#' @keywords write.qvalue
 #' @export
 write.qvalue <- function(x, file = "", sep = " ", eol = "\n", na = "NA", 
                          row.names = TRUE, col.names = TRUE) {
