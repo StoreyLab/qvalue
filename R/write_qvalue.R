@@ -34,6 +34,9 @@
 #' @export
 write.qvalue <- function(x, file = "", sep = " ", eol = "\n", na = "NA", 
                          row.names = TRUE, col.names = TRUE) {
+  if (class(x) != "qvalue) {
+    stop("x must be a qvalue object.")
+  }
   d <- data.frame(pvalue = x$pval,
                   qvalue = x$qval,
                   lfdr = x$lfdr,
