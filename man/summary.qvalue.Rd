@@ -66,7 +66,7 @@ Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of 
 \url{http://www.springer.com/statistics/book/978-3-642-04897-5}
 }
 \seealso{
-\code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{qwrite}}
+\code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{write.qvalue}}
 }
 \keyword{summary}
 

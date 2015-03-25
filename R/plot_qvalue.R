@@ -66,7 +66,7 @@
 #' plot(qobj, rng=c(0.0, 0.3))
 #'
 #' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
-#' @seealso \code{\link{qvalue}}, \code{\link{qwrite}}, \code{\link{summary.qvalue}}
+#' @seealso \code{\link{qvalue}}, \code{\link{write.qvalue}}, \code{\link{summary.qvalue}}
 #' @keywords plot
 #' @aliases plot, plot.qvalue
 #' @export
