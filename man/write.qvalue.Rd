@@ -29,12 +29,11 @@ Nothing of interest.
 Write the results of the q-value object to a file.
 }
 \details{
-The output file lists the estimate of \eqn{\pi_0}{pi_0}, which is the
-proportion of true null hypotheses. It also lists each p-value and
-corresponding q-values and local FDR values, one per line. If an FDR significance level was
+The output file includes: (i) the estimate of \eqn{\pi_0}{pi_0}, which is the
+proportion of true null hypotheses, (ii) p-values, (iii) q-values (iv) and
+local FDR values, one per line. If an FDR significance level was
 specified in the call to \code{\link{qvalue}}, the significance level
-is printed below the estimate of \eqn{\pi_0}{pi_0}, and an indicator
-of significance is included as a fourth column for each p-value and q-value.
+is printed and an indicator of significance is included.
 }
 \examples{
 # import data
