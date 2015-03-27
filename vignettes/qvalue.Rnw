@@ -34,9 +34,9 @@ foo <- packageDescription("qvalue")
 
 The {\tt qvalue} package performs false discovery rate (FDR) estimation from a collection of p-values or from a collection of test-statistics with corresponding simulated null statistics. This package produces esitmates of three key quantities: q-values, the proportion of true null hypotheses (denoted by $\pi_0$), and local false discovery rates.
 
-When carrying out multiple hypothesis tests, one typically starts either with a set of p-values or test-statistics.  Either quantity yields a natual ordering of tests from most significant to least significant.  For example, using p-values one would order the tests from smallest p-value (most significant) to largest p-value (least significant).  As another example, using F-statistics one would order the tests from largest F-statistic (most significant) to smallest F-statistic (least significant).
+When carrying out multiple hypothesis tests, one typically starts either with a set of p-values or test-statistics.  Either quantity yields a natural ordering of tests from most significant to least significant.  For example, using p-values one would order the tests from smallest p-value (most significant) to largest p-value (least significant).  As another example, using F-statistics one would order the tests from largest F-statistic (most significant) to smallest F-statistic (least significant).
 
-One may then ask: ``If I draw a significance threshold somewhere along this list, how much can I trust the top of the list, i.e., those I choose to call statistically singiciant?''  Another possible question is: ``Where should I draw a line of significance along this list so that we can expect that at most 10\% of the list I call significant is composed of false positives?''  We may also wish to know the reliability of a set of tests called significant for all possible thresholds simultaneously or we may want to estimate the probability that any given test is a true null hypothesis.  
+One may then ask: ``If I draw a significance threshold somewhere along this list, how much can I trust the top of the list, i.e., those I choose to call statistically significant?''  Another possible question is: ``Where should I draw a line of significance along this list so that we can expect that at most 10\% of the list I call significant is composed of false positives?''  We may also wish to know the reliability of a set of tests called significant for all possible thresholds simultaneously or we may want to estimate the probability that any given test is a true null hypothesis.  
 
 The {\tt qvalue} package forms various estimates that allow one to answer these and other questions.  The quantity of interest is the false discovery rate -- sometimes abbreviated as FDR -- which is roughly defined to be the expected proportion of false discoveries (also known as false positives) among all tests that are called significant.  
 
@@ -55,7 +55,7 @@ The statistical techniques implemented in the package come from the following pu
 {\em Proposed that the FDR and q-value estimators from Storey (2002) \cite{storey:2002} be used in a wide range of genomics studies as a way to determine statistical significance.} \\
 \bibentry{storey:tibs:2003}.
 
-{\em Unified the point estimation apporach of Storey (2002) \cite{storey:2002} with the more traditional sequential p-values method approaches from the multiple hypothesis testing literature (e.g., Benjamini and Hochberg 1995 \cite{benjamini:hochberg:1995}), and proved a number of theorems establishing that the methods in this package provide conservative FDR estimation and control for fixed FDR levels, fixed significance thresholds, and over all levels or thresholds simultaneously.} \\
+{\em Unified the point estimation approach of Storey (2002) \cite{storey:2002} with the more traditional sequential p-values method approaches from the multiple hypothesis testing literature (e.g., Benjamini and Hochberg 1995 \cite{benjamini:hochberg:1995}), and proved a number of theorems establishing that the methods in this package provide conservative FDR estimation and control for fixed FDR levels, fixed significance thresholds, and over all levels or thresholds simultaneously.} \\
 \bibentry{storey:etal:2004}.
 
 {\em Provides a concise summary of the main methods and theory on FDR.} \\
@@ -116,7 +116,7 @@ somethingsWrong = list(p=p2)
 hist(somethingsWrong$p, nclass=20, main="Problematic p-values", xlab="intentionally bad simulated p-values")
 @
 
-The ``U-shaped'' p-value histogram is a red flag. The key assumption behind the estimation peformed in this package is that null p-values follow a Uniform(0,1) distribution, which would result in a p-value histogram where the right take is fairly flat as in the Hedenfalk p-values.  U-shaped p-value histograms can indicate that a one-sided test was performed on data where there is signal in both directions, or it can indicate that there is dependence among the variables in the data.  In the latter case, we suggest considering the {\tt sva} Bioconductor package. In either case, it is usually possible to compute the p-values using a different model or method that will yield p-values that better match the underlying assumptions of the methods implemented in this package.
+The ``U-shaped'' p-value histogram is a red flag. The key assumption behind the estimation performed in this package is that null p-values follow a Uniform(0,1) distribution, which would result in a p-value histogram where the right take is fairly flat as in the Hedenfalk p-values.  U-shaped p-value histograms can indicate that a one-sided test was performed on data where there is signal in both directions, or it can indicate that there is dependence among the variables in the data.  In the latter case, we suggest considering the {\tt sva} Bioconductor package. In either case, it is usually possible to compute the p-values using a different model or method that will yield p-values that better match the underlying assumptions of the methods implemented in this package.
 
 
 \subsection{Calculating q-values}
@@ -204,7 +204,7 @@ Applying {\tt plot} to the {\tt hedenfalk} {\tt qvalue} object, we get:
 plot(qobj)
 @
 
-The main purpose of the first plot is to gauge the reliability of the $\pi_{0}$. The tuning parameter $\lambda$ has to be deal with in order to obtain an overal estimate of $\pi_{0}$. The variable $\lambda$ is called {\tt lambda} in the package; it can be fixed or automatically chosen. The estimated $\pi_{0}$ is plotted versus the tuning parameter $\lambda$. As $\lambda$ gets larger, the bias of the estimate decreases, yet the variance increases. See Storey (2002) \cite{storey:2002} for more on this. Comparing your final estimate of $\pi_{0}$ to this plot gives a good sense as to its quality. A smoother is fit to the plot in order to elucidate the trend of the estimates. The remaining plots show how many tests are significant, as well as how many false positives to expect for each q-value cut-off. 
+The main purpose of the first plot is to gauge the reliability of the $\pi_{0}$. The tuning parameter $\lambda$ has to be deal with in order to obtain an overall estimate of $\pi_{0}$. The variable $\lambda$ is called {\tt lambda} in the package; it can be fixed or automatically chosen. The estimated $\pi_{0}$ is plotted versus the tuning parameter $\lambda$. As $\lambda$ gets larger, the bias of the estimate decreases, yet the variance increases. See Storey (2002) \cite{storey:2002} for more on this. Comparing your final estimate of $\pi_{0}$ to this plot gives a good sense as to its quality. A smoother is fit to the plot in order to elucidate the trend of the estimates. The remaining plots show how many tests are significant, as well as how many false positives to expect for each q-value cut-off. 
 
 
 Additionally, running {\tt hist} on a q-value object can be used to view the histogram of p-values along with line plots of both q-values and local FDR values versus the p-values:
@@ -230,3 +230,4 @@ This software development has been supported in part by funding from the Nationa
 \bibliography{qvaluerefs} 
 
 \end{document}
+
