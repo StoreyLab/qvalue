@@ -19,15 +19,17 @@
 #' If no options are selected, then the method used to estimate \eqn{\pi_0}{pi_0} is
 #' the smoother method described in Storey and Tibshirani (2003). The
 #' bootstrap method is described in Storey, Taylor & Siegmund (2004). A closed form solution of the
-#' bootstrap method solved by David Robinson is used in the package and is significantly faster.
+#' bootstrap method is used in the package and is significantly faster.
 #'
-#' @return 
-#' Returns a list:
-#' \item{pi0}{A numeric that is the estimated proportion of true null p-values}
-#' \item{lambda}{A vector of lambda value(s) choosen}
-#' \item{pi0.lambda}{A vector of the proportion of null values at lambda}
-#' \item{pi0.smooth}{A vector of the proportion of null values at lambda from
-#'                    spline fit. If pi0.method is "bootstrap" then value will be NULL.}
+#' @return Returns a list: 
+#' \item{pi0}{A numeric that is the estimated proportion
+#' of true null p-values.} 
+#' \item{pi0.lambda}{A vector of the proportion of null
+#' values at the \eqn{\lambda}{lambda} values (see vignette).} 
+#' \item{lambda}{A vector of \eqn{\lambda}{lambda} value(s) utilized in calculating \code{pi0.lambda}.} 
+#' \item{pi0.smooth}{A vector of fitted values from the
+#' smoother fit to the \eqn{\pi_0}{pi_0} estimates at each \code{lambda} value
+#' (pi0.method="bootstrap" returns NULL).}
 #'
 #' @references
 #' Storey JD. (2002) A direct approach to false discovery rates. Journal
@@ -69,15 +71,15 @@
 #' hist(qobj)
 #' plot(qobj)
 #' 
-#' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass, 
-#' David G. Robinson
+#' @author John D. Storey 
 #' @seealso \code{\link{qvalue}}
 #' @keywords pi0est, proportion true nulls
 #' @aliases pi0est
 #' @export
-pi0est <- function(p = NULL, lambda = seq(0.05,0.95,0.05), pi0.method = "smoother", 
+pi0est <- function(p = NULL, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "bootstrap"), 
                    smooth.df = 3, smooth.log.pi0 = FALSE, ...) {
   # Check input arguments
+  pi0.method = match.arg(pi0.method)
   m <- length(p)
   lambda <- sort(lambda) # guard against user input
   
@@ -114,6 +116,7 @@ pi0est <- function(p = NULL, lambda = seq(0.05,0.95,0.05), pi0.method = "smoothe
       }
     } else if (pi0.method == "bootstrap") {  
       # Bootstrap method closed form solution by David Robinson 
+      pi0.lambda <- pi0
       minpi0 <- quantile(pi0, prob = 0.1)
       W <- sapply(lambda, function(l) sum(p >= l))
       mse <- (W / (m ^ 2 * (1 - lambda) ^ 2)) * (1 - W / m) + (pi0 - minpi0) ^ 2

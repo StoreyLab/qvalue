@@ -19,8 +19,9 @@ Nothing of interest.
 Histogram of p-values
 }
 \details{
-The function hist allows one to view a histogram of the p-values along with
-line plots of the q-values and local FDR values versus p-values.
+This function allows one to view a histogram of the p-values along with
+line plots of the q-values and local FDR values versus p-values. The \eqn{\pi_0}{pi_0}
+estimate is also displayed.
 }
 \examples{
 # import data
@@ -32,7 +33,7 @@ qobj <- qvalue(p)
 hist(qobj)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+Andrew J. Bass
 }
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal

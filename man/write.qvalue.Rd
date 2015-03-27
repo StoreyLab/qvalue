@@ -4,8 +4,8 @@
 \alias{write.qvalue}
 \title{Write results to file}
 \usage{
-write.qvalue(x, file = "", sep = " ", eol = "\\n", na = "NA",
-  row.names = TRUE, col.names = TRUE)
+write.qvalue(x, file = NULL, sep = " ", eol = "\\n", na = "NA",
+  row.names = FALSE, col.names = TRUE)
 }
 \arguments{
 \item{x}{A q-value object.}
@@ -29,11 +29,11 @@ Nothing of interest.
 Write the results of the q-value object to a file.
 }
 \details{
-The output file includes: (i) the estimate of \eqn{\pi_0}{pi_0}, which is the
-proportion of true null hypotheses, (ii) p-values, (iii) q-values (iv) and
-local FDR values, one per line. If an FDR significance level was
-specified in the call to \code{\link{qvalue}}, the significance level
-is printed and an indicator of significance is included.
+The output file includes: (i) p-values, (ii)
+q-values (iii) local FDR values, and (iv) the estimate of \eqn{\pi_0}{pi_0},
+one per line. If an FDR significance
+level was specified in the call to \code{\link{qvalue}}, the significance
+level is printed and an indicator of significance is included.
 }
 \examples{
 # import data
@@ -45,10 +45,11 @@ qobj <- qvalue(p)
 write.qvalue(qobj, file="myresults.txt")
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+John D. Storey, Andrew J. Bass
 }
 \seealso{
-\code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{summary.qvalue}}
+\code{\link{qvalue}}, \code{\link{plot.qvalue}},
+  \code{\link{summary.qvalue}}
 }
 \keyword{write.qvalue}
 

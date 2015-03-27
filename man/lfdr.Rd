@@ -32,19 +32,15 @@ A vector of estimated local FDR values, with each entry corresponding to the ent
 Estimate the local FDR values from p-values.
 }
 \details{
-The local FDR is defined to be the FDR in a small neighborhood about the value of a test statistic.  This is
-typically formulated in a Bayesian framework to multiple testing.  Technical details can be found in Efron et al. (2001)
-and Storey (2003) in the references below.  The following is a brief, intuitive summary.  Suppose that each hypothesis
-test is a true null hypothesis with probability \eqn{\pi_0}{pi_0}. Suppose that the probability density function of a
-true null hypothesis test is \eqn{f_0}, whereas for a true alternative it is \eqn{f_1}.  The marginal probability
-density function can be written as \eqn{f = \pi_0 f_0 + (1-\pi_0) f_1}{f = pi_0*f_0 + (1-pi_0)*f_1}.  The local FDR for
-a given p-value \eqn{p} is then defined to be:
-\deqn{\frac{\pi_0 f_0(p)}{f(p)}.}{pi_0 * f_0(p) / f(p).}
-For p-values, the assumption is that p-values derived from true null hypotheses are distributed Uniform(0,1),
-in which case \eqn{f_0(p)=1}.  Also, \eqn{\pi_0}{pi_0} may be estimated from the p-values via the function \code{\link{pi0est}}.
-This leaves estimation of \eqn{f(p)}, which is the density estimated from the set of observed p-values.
-
-The strategy taken in \code{\link{lfdr}} is that an estimate of the density of the p-values \eqn{f(p)} is formed by utilizing the \code{density} function provided by the \code{\link{stats}} package. This allows one to estimate local FDRs very generally, without being limited to the two-sample t-tests which are of primary focus in Efron (2001) and references that follow.  In those papers, specialized estimators are formulated that rely substantially on the test-statistic used.  Here, one may apply \code{\link{lfdr}} as long as the Uniform(0,1) distribution is a reasonable assumption for the p-values coming from true null hypotheses.
+It is assumed that null p-values follow a Uniform(0,1) distribution.
+  The estimated proportion of true null hypotheses \eqn{\hat{\pi}_0}{pi_0} is either
+  a user-provided value or the value calculated via \code{\link{pi0est}}.
+  This function works by forming an estimate of the marginal density of the
+  observed p-values, say \eqn{\hat{f}(p)}{f(p)}. Then the local FDR is estimated as
+  \eqn{{\rm lFDR}(p) = \hat{\pi}_0/\hat{f}(p)}{lFDR(p) = pi_0/f(p)}, with
+  adjustments for monotonicity and to guarantee that \eqn{{\rm lFDR}(p) \leq
+  1}{lFDR(p) <= 1}.  See the Storey (2011) reference below for a concise
+  mathematical definition of local FDR.
 }
 \examples{
 # import data
@@ -57,7 +53,7 @@ qobj = qvalue(p)
 hist(qobj)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+John D. Storey \email{jstorey@princeton.edu}
 }
 \references{
 Efron B, Tibshirani R, Storey JD, and Tisher V. (2001) Empirical Bayes analysis

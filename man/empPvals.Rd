@@ -2,33 +2,47 @@
 % Please edit documentation in R/empPvals.R
 \name{empPvals}
 \alias{empPvals}
-\title{Calculate p-values from a set of observed test statistics and simulated null test statistics}
+\title{Calculate p-values from a set of observed test statistics and
+  simulated null test statistics}
 \usage{
 empPvals(stat, stat0, pool = TRUE)
 }
 \arguments{
 \item{stat}{A vector of calculated test statistics.}
 
-\item{stat0}{A vector or matrix of simulated or data-resampled null test statistics.}
+\item{stat0}{A vector or matrix of simulated or data-resampled null test
+statistics.}
 
-\item{pool}{If FALSE, stat0 must be a matrix with the number of rows equal to the length of \code{stat}. Default is TRUE.}
+\item{pool}{If FALSE, stat0 must be a matrix with the number of rows equal to
+  the length of \code{stat}. Default is TRUE.}
 }
 \value{
 A vector of p-values calculated as described above.
 }
 \description{
-Calculates p-values from a set of observed test statistics and simulated null test statistics
+Calculates p-values from a set of observed test statistics and
+  simulated null test statistics
 }
 \details{
-The argument \code{stat} must be such that the larger the value is the more deviated (i.e., "more extreme") from the null hypothesis
-it is. The argument \code{stat0} should be calculated analogously on data that represents observations from the null hypothesis.
-Examples include an F-statistic or the absolute value of a t-statistic. The p-values are calculated as the proportion of values
-from \code{stat0} that are greater than or equal to that from \code{stat}.  If \code{pool=TRUE} is selected, then all of \code{stat0}
-is used in calculating the p-value for a given entry of \code{stat}. If \code{pool=FALSE}, then it is assumed that \code{stat0} is a
-matrix, where \code{stat0[i,]} is used to calculate the p-value for \code{stat[i]}.  The function \code{empPvals} calculates "pooled"
-p-values faster than using a for-loop.
+The argument \code{stat} must be such that the larger the value is
+  the more deviated (i.e., "more extreme") from the null hypothesis it is.
+  Examples include an F-statistic or the absolute value of a t-statistic. The
+  argument \code{stat0} should be calculated analogously on data that
+  represents observations from the null hypothesis distribution. The p-values
+  are calculated as the proportion of values from \code{stat0} that are
+  greater than or equal to that from \code{stat}. If \code{pool=TRUE} is
+  selected, then all of \code{stat0} is used in calculating the p-value for a
+  given entry of \code{stat}. If \code{pool=FALSE}, then it is assumed that
+  \code{stat0} is a matrix, where \code{stat0[i,]} is used to calculate the
+  p-value for \code{stat[i]}. The function \code{empPvals} calculates
+  "pooled" p-values faster than using a for-loop.
 
-See page 18 of the Supporting Information in Storey et al. (2005) PNAS (\url{http://www.pnas.org/content/suppl/2005/08/26/0504609102.DC1/04609SuppAppendix.pdf}) for an explanation as to why calculating p-values from pooled empirical null statistics and then estimating FDR on these p-values is equivalent to directly thresholding the test statistics themselves and utilizing an analogous FDR estimator.
+  See page 18 of the Supporting Information in Storey et al. (2005) PNAS
+  (\url{http://www.pnas.org/content/suppl/2005/08/26/0504609102.DC1/04609SuppAppendix.pdf})
+   for an explanation as to why calculating p-values from pooled empirical
+  null statistics and then estimating FDR on these p-values is equivalent to
+  directly thresholding the test statistics themselves and utilizing an
+  analogous FDR estimator.
 }
 \examples{
 # import data
@@ -44,18 +58,17 @@ p.testspecific <- empPvals(stat=stat, stat0=stat0, pool=FALSE)
 qqplot(p.pooled, p.testspecific); abline(0,1)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+John D. Storey \email{jstorey@princeton.edu}
 }
 \references{
 Storey JD and Tibshirani R. (2003) Statistical significance for
-genome-wide experiments. Proceedings of the National Academy of Sciences,
-100: 9440-9445.  \cr
-\url{http://www.pnas.org/content/100/16/9440.full}
+  genome-wide experiments. Proceedings of the National Academy of Sciences,
+  100: 9440-9445.  \cr \url{http://www.pnas.org/content/100/16/9440.full}
 
-Storey JD, Xiao W, Leek JT, Tompkins RG, Davis RW. (2005) Significance
-analysis of time course microarray experiments.  Proceedings of the
-National Academy of Sciences, 102 (36), 12837-12842. \cr
-\url{http://www.pnas.org/content/102/36/12837.full.pdf?with-ds=yes}
+  Storey JD, Xiao W, Leek JT, Tompkins RG, Davis RW. (2005) Significance
+  analysis of time course microarray experiments.  Proceedings of the
+  National Academy of Sciences, 102 (36), 12837-12842. \cr
+  \url{http://www.pnas.org/content/102/36/12837.full.pdf?with-ds=yes}
 }
 \seealso{
 \code{\link{qvalue}}

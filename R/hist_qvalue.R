@@ -7,8 +7,9 @@
 #' @param ... Additional arguments, currently unused.
 #'
 #' @details
-#' The function hist allows one to view a histogram of the p-values along with
-#' line plots of the q-values and local FDR values versus p-values. 
+#' This function allows one to view a histogram of the p-values along with
+#' line plots of the q-values and local FDR values versus p-values. The \eqn{\pi_0}{pi_0}
+#' estimate is also displayed.
 #'
 #' @return
 #' Nothing of interest.
@@ -47,7 +48,7 @@
 #' hist(qobj) 
 #' 
 #' @aliases hist, hist.qvalue
-#' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
+#' @author Andrew J. Bass
 #' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{summary.qvalue}}
 #' @keywords histogram
 #' @export

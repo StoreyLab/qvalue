@@ -20,17 +20,16 @@ estimate more robust for small p-values and a direct finite sample estimate of p
 }
 \value{
 A list of object type "qvalue" containing:
-\item{call}{function call}
-\item{pi0}{an estimate of the proportion of null p-values}
-\item{qvalues}{a vector of the estimated q-values (the main quantity of interest)}
-\item{pvalues}{a vector of the original p-values}
-\item{lfdr}{a vector of the local FDR values}
-\item{significant}{if fdr.level is specified, and indicator of whether the
+\item{call}{Function call.}
+\item{pi0}{An estimate of the proportion of null p-values.}
+\item{qvalues}{A vector of the estimated q-values (the main quantity of interest).}
+\item{pvalues}{A vector of the original p-values.}
+\item{lfdr}{A vector of the estimated local FDR values.}
+\item{significant}{If fdr.level is specified, and indicator of whether the
                   q-value fell below fdr.level (taking all such q-values to be significant
-                                                controls FDR at level fdr.level)}
-\item{pi0.lambda}{an estimate of the proportion of null p-values at each lambda
-                 from spline fit. If pi0.method is "bootstrap" then it returns NULL.}
-\item{lambda}{a vector lambda values utilized}
+                                                controls FDR at level fdr.level).}
+\item{pi0.lambda}{An estimate of the proportion of null p-values at each \eqn{\lambda}{lambda} value (see vignette).}
+\item{lambda}{A vector of the \eqn{\lambda}{lambda} values utilized to obtain \code{pi0.lambda}.}
 }
 \description{
 Estimate the q-values for a given set of p-values.  The q-value of a
@@ -59,7 +58,7 @@ qobj <- qvalue(p, lambda=0.5, pfdr=TRUE)
 qobj <- qvalue(p, fdr.level=0.05, pi0.method="bootstrap", adj=1.2)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+John D. Storey \email{jstorey@princeton.edu}
 }
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal

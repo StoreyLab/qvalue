@@ -2,22 +2,30 @@
 % Please edit documentation in R/hedenfalk.R
 \name{hedenfalk}
 \alias{hedenfalk}
-\title{P-values and test-statistics from the Hedenfalk et al. (2001) gene expression dataset}
+\title{P-values and test-statistics from the Hedenfalk et al. (2001) gene
+  expression dataset}
 \usage{
 data(hedenfalk)
 }
 \value{
 A list called \code{hendfalk} containing:
-\item{p}{Vector of 3,170 p-values of tests comparing BRCA1 to BRCA2}
-\item{stat}{Vector of 3,170 absolute two-sample t-statistics comparing BRCA1 to BRCA2}
-\item{stat0}{A 3,170 by 100 matrix of absolute two-sample t-statistics from 100 independent permutations of 4
-the BRCA1 and BRCA2 labels; the row \code{stat0[i,]} contains the permutation statistics corresponding to observed statistic \code{stat[i]}}
+\item{p}{Vector of 3,170
+p-values of tests comparing BRCA1 to BRCA2.}
+\item{stat}{Vector of 3,170
+absolute two-sample t-statistics comparing BRCA1 to BRCA2.}
+\item{stat0}{A
+3,170 by 100 matrix of absolute two-sample t-statistics from 100 independent
+permutations of the BRCA1 and BRCA2 labels; the row \code{stat0[i,].}
+contains the permutation statistics corresponding to observed statistic
+\code{stat[i]}.}
 }
 \description{
-The data from the breast cancer gene expression study of Hedenfalk et al. (2001) were obtained and analyzed.
-A comparison was made between 3,226 genes of two mutation types, BRCA1 (7 arrays) and BRCA2 (8 arrays).
-The data included here are p-values, test-statistics, and permutation null test-statistics obtained from
-a two-sample t-test analysis on a subset of 3,170 genes, as described in Storey and Tibshirani (2003).
+The data from the breast cancer gene expression study of
+Hedenfalk et al. (2001) were obtained and analyzed. A comparison was made
+between 3,226 genes of two mutation types, BRCA1 (7 arrays) and BRCA2 (8
+arrays). The data included here are p-values, test-statistics, and
+permutation null test-statistics obtained from a two-sample t-test analysis
+on a set of 3170 genes, as described in Storey and Tibshirani (2003).
 }
 \examples{
 # import data
