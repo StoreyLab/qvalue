@@ -52,7 +52,7 @@ qobj <- qvalue(p)
 plot(qobj, rng=c(0.0, 0.3))
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass
+John D. Storey, Andrew J. Bass
 }
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal

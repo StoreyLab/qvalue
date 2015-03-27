@@ -53,7 +53,7 @@ qobj = qvalue(p)
 hist(qobj)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}
+John D. Storey
 }
 \references{
 Efron B, Tibshirani R, Storey JD, and Tisher V. (2001) Empirical Bayes analysis

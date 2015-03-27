@@ -49,7 +49,7 @@
 #' qobj = qvalue(p)
 #' hist(qobj)
 #'
-#' @author John D. Storey \email{jstorey@@princeton.edu}
+#' @author John D. Storey 
 #' @seealso \code{\link{qvalue}}, \code{\link{pi0est}}, \code{\link{hist.qvalue}}
 #' @aliases lfdr
 #' @keywords local False Discovery Rate, lfdr

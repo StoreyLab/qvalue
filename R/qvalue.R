@@ -72,7 +72,7 @@
 #' qobj <- qvalue(p, lambda=0.5, pfdr=TRUE)
 #' qobj <- qvalue(p, fdr.level=0.05, pi0.method="bootstrap", adj=1.2)
 #' 
-#' @author John D. Storey \email{jstorey@@princeton.edu}
+#' @author John D. Storey
 #' @seealso \code{\link{pi0est}}, \code{\link{lfdr}}, \code{\link{summary.qvalue}}, 
 #' \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{write.qvalue}}
 #' @keywords qvalue

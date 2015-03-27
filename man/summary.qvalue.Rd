@@ -39,7 +39,7 @@ qobj <- qvalue(p)
 summary(qobj, cuts=c(0.01, 0.05))
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}, Andrew J. Bass, Alan Dabney
+John D. Storey, Andrew J. Bass, Alan Dabney
 }
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal

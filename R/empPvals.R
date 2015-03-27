@@ -54,7 +54,7 @@
 #' # compare pooled to test-specific p-values
 #' qqplot(p.pooled, p.testspecific); abline(0,1)
 #' 
-#' @author John D. Storey \email{jstorey@@princeton.edu}
+#' @author John D. Storey 
 #' @seealso \code{\link{qvalue}}
 #' @aliases empPvals
 #' @keywords pvalues

@@ -65,7 +65,7 @@
 #" # view plots for q-values between 0 and 0.3:
 #' plot(qobj, rng=c(0.0, 0.3))
 #'
-#' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass
+#' @author John D. Storey, Andrew J. Bass
 #' @seealso \code{\link{qvalue}}, \code{\link{write.qvalue}}, \code{\link{summary.qvalue}}
 #' @keywords plot
 #' @aliases plot, plot.qvalue

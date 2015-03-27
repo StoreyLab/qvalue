@@ -50,7 +50,7 @@
 #' qobj <- qvalue(p)
 #' summary(qobj, cuts=c(0.01, 0.05))
 #'
-#' @author John D. Storey \email{jstorey@@princeton.edu}, Andrew J. Bass, Alan Dabney
+#' @author John D. Storey, Andrew J. Bass, Alan Dabney
 #' @keywords summary
 #' @aliases summary, summary.qvalue
 #' @seealso \code{\link{qvalue}}, \code{\link{plot.qvalue}}, \code{\link{write.qvalue}}

@@ -13,9 +13,11 @@ Maintainer: John D. Storey <jstorey@princeton.edu>
 biocViews: MultipleComparisons
 Description: This package takes a list of p-values resulting from the
         simultaneous testing of many hypotheses and estimates their
-        q-values. The q-value of a test measures the proportion of
-        false positives incurred (called the false discovery rate)
-        when that particular test is called significant. Various plots
+        q-values and local FDR values. The q-value of a test measures 
+        the proportion of false positives incurred (called the false 
+        discovery rate) when that particular test is called significant. 
+        The local FDR measures the posterior probability the null 
+        hypothesis is true given the test's p-value. Various plots
         are automatically generated, allowing one to make sensible
         significance cut-offs. Several mathematical results have
         recently been shown on the conservative accuracy of the

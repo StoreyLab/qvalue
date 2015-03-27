@@ -58,7 +58,7 @@ qobj <- qvalue(p, lambda=0.5, pfdr=TRUE)
 qobj <- qvalue(p, fdr.level=0.05, pi0.method="bootstrap", adj=1.2)
 }
 \author{
-John D. Storey \email{jstorey@princeton.edu}
+John D. Storey
 }
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal
