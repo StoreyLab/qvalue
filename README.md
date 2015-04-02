@@ -19,9 +19,9 @@ Installation and documentation
 To install, open R and type:
 
 ```R 
-install.packages('devtools')
-library('devtools')
-install_github('jdstorey/qvalue')
+install.packages("devtools")
+library("devtools")
+install_github("jdstorey/qvalue")
 ```
 
 The vignette can be viewed by typing:
