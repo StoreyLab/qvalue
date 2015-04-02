@@ -70,7 +70,7 @@ hist(qobj)
 plot(qobj)
 ```
 
-For more details on how to use the package please see the package vignette.
+For additional details, please see the package vignette.
 
 ### Point-and-click implementation
 A [Shiny](http://shiny.rstudio.com "Shiny") implementation of the package written by Andrew Bass can be found [here](http://qvalue.princeton.edu "qvalue").
