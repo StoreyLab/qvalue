@@ -1,7 +1,7 @@
 Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
-Version: 1.99.0
+Version: 1.99.1
 Date: 2015-03-24
 Authors@R: c(
     person("John", "Storey", email = "jstorey@princeton.edu", role = c("aut", "cre")),
@@ -28,5 +28,5 @@ VignetteBuilder: knitr
 Imports: splines, ggplot2, grid, reshape2
 Suggests: knitr
 Depends: R(>= 2.10)
-URL: http://github.com/jdstorey/qvalue, http://qvalue.princeton.edu/
+URL: http://qvalue.princeton.edu/, http://github.com/jdstorey/qvalue
 License: LGPL

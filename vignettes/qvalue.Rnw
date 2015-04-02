@@ -32,7 +32,7 @@ foo <- packageDescription("qvalue")
 
 \section{Introduction}
 
-The {\tt qvalue} package performs false discovery rate (FDR) estimation from a collection of p-values or from a collection of test-statistics with corresponding simulated null statistics. This package produces esitmates of three key quantities: q-values, the proportion of true null hypotheses (denoted by $\pi_0$), and local false discovery rates.
+The {\tt qvalue} package performs false discovery rate (FDR) estimation from a collection of p-values or from a collection of test-statistics with corresponding empirical null statistics. This package produces esitmates of three key quantities: q-values, the proportion of true null hypotheses (denoted by $\pi_0$), and local false discovery rates.
 
 When carrying out multiple hypothesis tests, one typically starts either with a set of p-values or test-statistics.  Either quantity yields a natural ordering of tests from most significant to least significant.  For example, using p-values one would order the tests from smallest p-value (most significant) to largest p-value (least significant).  As another example, using F-statistics one would order the tests from largest F-statistic (most significant) to smallest F-statistic (least significant).
 
@@ -40,26 +40,31 @@ One may then ask: ``If I draw a significance threshold somewhere along this list
 
 The {\tt qvalue} package forms various estimates that allow one to answer these and other questions.  The quantity of interest is the false discovery rate -- sometimes abbreviated as FDR -- which is roughly defined to be the expected proportion of false discoveries (also known as false positives) among all tests that are called significant.  
 
-An overview of the FDR and its well-established methods and theory may be found in Storey (2011) \cite{Storey2011} (preprint freely available at \url{http://genomine.org/papers/Storey_FDR_2011.pdf}).  We recommend this paper for users of {\tt qvalue} unfamiliar with FDR, q-value, and local FDR estimation.
+An overview of the FDR and its well-established methods and theory may be found in Storey (2011) \cite{Storey2011} (preprint freely available at \url{http://genomine.org/papers/Storey_FDR_2011.pdf}).  We recommend this paper for users of {\tt qvalue} who want a quick start and are unfamiliar with FDR, q-value, and local FDR estimation.
 
 
 \section{Citing this package}
-The statistical techniques implemented in the package come from the following publications.
+The statistical techniques implemented in the package come from the following publications.  We ask that you cite the most appropriate paper(s) from this list when reporting results from the {\tt qvalue} package.
 
-{\em Proposed the key strategy and derived the main estimators used in this package.} \\
-\bibentry{storey:2002}.
+{\bf \bibentry{storey:2002}.} \\
+{\em Proposed the key strategy and derived the main estimators used in this package.}
 
-{\em Developed and proved theorems showing a direct relationship between FDR and Bayesian classification, giving a direct Bayesian version and interpretation of the quantities estimated in this package.} \\
-\bibentry{storey:2003}.
+{\bf \bibentry{storey:2003}.} \\
+{\em Developed and proved theorems showing a direct relationship between FDR and Bayesian classification, giving a direct Bayesian version and interpretation of the quantities estimated in this package.}
 
-{\em Proposed that the FDR and q-value estimators from Storey (2002) \cite{storey:2002} be used in a wide range of genomics studies as a way to determine statistical significance.} \\
-\bibentry{storey:tibs:2003}.
+{\bf \bibentry{storey:tibs:2003}.} \\
+{\em Proposed that the FDR and q-value estimators from Storey (2002) \cite{storey:2002} be used in a wide range of genomics studies as a way to determine statistical significance.}
 
-{\em Unified the point estimation approach of Storey (2002) \cite{storey:2002} with the more traditional sequential p-values method approaches from the multiple hypothesis testing literature (e.g., Benjamini and Hochberg 1995 \cite{benjamini:hochberg:1995}), and proved a number of theorems establishing that the methods in this package provide conservative FDR estimation and control for fixed FDR levels, fixed significance thresholds, and over all levels or thresholds simultaneously.} \\
-\bibentry{storey:etal:2004}.
+{\bf \bibentry{storey:etal:2004}.} \\
+{\em Unified the point estimation approach of Storey (2002) \cite{storey:2002} with the more traditional sequential p-values method approaches from the multiple hypothesis testing literature (e.g., Benjamini and Hochberg 1995 \cite{benjamini:hochberg:1995}), and proved a number of theorems establishing that the methods in this package provide conservative FDR estimation and control for fixed FDR levels, fixed significance thresholds, and over all levels or thresholds simultaneously.}
 
-{\em Provides a concise summary of the main methods and theory on FDR.} \\
-\bibentry{Storey2011}.
+{\bf \bibentry{Storey2011}.} \\
+{\em Provides a concise summary of the main methods and theory on FDR.}
+
+The format of a citation to the {\tt qvalue} package itself is obtained from:
+<<citingqvalue, eval=FALSE>>=
+citation("qvalue")
+@
 
 \section{Getting help}
 Many questions about {\tt qvalue} will hopefully be answered by this documentation and references therein.  As with any R package, detailed information on functions, their arguments and values, can be obtained in the help files. To view the
@@ -67,131 +72,192 @@ help for {\tt qvalue} within R, type
 <<help_qvalue>>=
 help(package="qvalue")
 @
-\noindent If you identify bugs related to basic usage please contact the authors directly.  Otherwise, any questions or problems regarding {\tt qvalue} will most efficiently be addressed on the Bioconductor support site, \url{https://support.bioconductor.org/}.
+\noindent If you identify bugs related to basic usage please contact the authors directly, preferably via GitHub at \url{https://github.com/jdstorey/qvalue}.  Otherwise, any questions or problems regarding {\tt qvalue} will most efficiently be addressed on the Bioconductor support site, \url{https://support.bioconductor.org/}.
 
 \section{Quick start guide}
-Given a set of p-values, the q-values can be calculated by using the {\tt qvalue} function:
+Given a set of p-values, the {\tt qvalue} object can be calculated by using the {\tt qvalue} function:
+
 <<quick_p>>=
+library(qvalue)
 data(hedenfalk)
 pvalues <- hedenfalk$p
-qobj <- qvalue(pvalues)
-qvalues <- qobj$qvalues
+qobj <- qvalue(p = pvalues)
 @
 
-Additionally, q-values can be calculated given a set of observed and statistics generated from the null distribution:
+Additionally, the {\tt qvalue} object can be calculated given a set of empirical null statistics:
+
 <<quick_stat>>=
+library(qvalue)
 data(hedenfalk)
 obs.stat <- hedenfalk$stat
 null.stat <- hedenfalk$stat0
-pvalues <- empPvals(stat=obs.stat, stat0=null.stat)
-qobj <- qvalue(pvalues)
-qvalues <- qobj$qvalues
+pvalues <- empPvals(stat = obs.stat, stat0 = null.stat)
+qobj <- qvalue(p = pvalues)
 @
+
+Once the {\tt qvalue} object is created, estimates of the q-values, the proportion of true null hypotheses $\pi_{0}$, and the local false discovery rates can be accessed from {\tt qobj}:
+
+<<quick_access>>=
+qvalues <- qobj$qvalues
+pi0 <- qobj$pi0
+lfdr <- qobj$lfdr
+@
+
+The object can be summarized and visualized by:
+<<quick_sumviz, eval=FALSE>>=
+summary(qobj)
+hist(qobj)
+plot(qobj)
+@
+
 The following sections of the manual go through a case study to show additional features of the {\tt qvalue} package.
 
 \section{Case study: differential gene expression}
-We demonstrate the functionality of this package using gene expression data from the breast cancer study of Hedenfalk et al. (2001) \cite{hedenfalk:etal:2001}. The data set is included with the {\tt qvalue} package:
+We demonstrate the functionality of this package using gene expression data from the breast cancer study of Hedenfalk et al. (2001) \cite{hedenfalk:etal:2001}. The test-statistics and p-values from our analysis are included with the {\tt qvalue} package:
 
 <<load_qvalue>>=
 data(hedenfalk)
 names(hedenfalk)
 @
 
-The list has three variables: {\tt p}, {\tt stat}, {\tt stat0}. The {\tt p} variable contains the p-values of the data set, the {\tt stat} contains the alternative statistics and the {\tt stat0} contains the null statistics.
+A test of differential gene expression was performed between two types of genetic mutations that are associated with an increased risk of breast cancer, BRCA1 and BRCA2. There were 7 and 8 cDNA arrays for BRCA1 and BRCA2, respectively. The example considered here is restricted to 3170 genes as described in Storey and Tibshirani (2003) \cite{storey:tibs:2003}.\footnote{The original data and code for pre-processing can be found at \url{http://genomine.org/qvalue}.}
 
-The comparison was made between two types of genetic mutation that are associated with an increased risk of breast cancer, BRCA1 and BRCA2. There were 7 and 8 cDNA arrays for BRCA1 and BRCA2, respectively. The example considered here is restricted to $3170$ genes as described in Storey and Tibshirani (2003) \cite{storey:tibs:2003}.\footnote{The original data and code for pre-processing can be found at \url{http://genomine.org/qvalue}.}
+The list {\tt hedenfalk} has three variables: {\tt p}, {\tt stat}, {\tt stat0}. The {\tt p} variable is a vector of p-values from the tests of differential expression (one per gene for a total of 3170); {\tt stat} is a vector also of length 3170 that contains the observed test-statistics calculated on the original data (the statistic is the absolute values of a two-sample t-test); and {\tt stat0} is a $3170 \times 100$ matrix that contains the empirical ``null statistics'', which were generated by permuting the BRCA1 and BRCA2 group labels 100 times and recalculating the absolute t-statistics for each permutation.
+
+\subsection{Calculating p-values}
+One will typically already have a vector of p-values calculated using an appropriate method before utilziing the {\tt qvalue} package.  Sometimes users will instead have a vector of ``observed statistics'' that have been calculated on the original data, and then simulated or data-resampled (e.g., bootstrap, permutation) ``null statistics''.  As long as the statistics are constructed such that the larger a statistic is, the more evidence there is against the null hypothesis in favor of the alternative hypothesis (e.g., the larger it is the ``more extreme'' it is), then there is a function in {\tt qvalue} called {\tt empPvals} that allows one to efficiently calculate p-values to be input into {\tt qvalue}:
+
+<<obsnullstat, dependson="load_qvalue">>=
+null.stats <- hedenfalk$stat0
+obs.stats <- hedenfalk$stat
+pvalues <- empPvals(stat = obs.stats, stat0 = null.stats, pool = FALSE)
+@
+
+The documentation on {\tt empPvals}, which can be accessed via {\tt ?empPvals}, explains how to use this function to calculate test-specific or test-nonspecific pooled p-values using this function.  
+
 
 \subsection{Checking the p-value histogram}
-To get a feel for the data, it is essential to view the p-value histogram:
+Before running {\tt qvalue}, we strongly recommend that you view a histogram of the p-values:
 <<pvalue_hist2, dependson=c("load_qvalue", "quick_p"),  fig.height=3, fig.width=5>>=
 hist(hedenfalk$p, nclass=20)
 @
 
-The p-values are relatively flat at the end of the histogram which is important to determine an accurate $\pi_{0}$ estimate. Suppose the p-value histogram instead looked like this simulated set of p-values:
+The p-values are relatively flat at the right tail of the histogram. This is an important step in determining whether the true null p-values are distributed according to a Uniform(0,1) distribution. Suppose the p-value histogram instead looked like this simulated set of p-values:
 
 <<pvalue_histBad, dependson=c("load_qvalue", "quick_p"), echo=FALSE, fig.height=3, fig.width=5>>=
 set.seed(478)
 p2 = c(hedenfalk$p, (runif(450, min=0.7, max=1))^(0.33))
 somethingsWrong = list(p=p2)
-hist(somethingsWrong$p, nclass=20, main="Problematic p-values", xlab="intentionally bad simulated p-values")
+hist(somethingsWrong$p, nclass=20, main="Problematic p-values", xlab="intentionally bad, simulated p-values")
 @
 
-The ``U-shaped'' p-value histogram is a red flag. The key assumption behind the estimation performed in this package is that null p-values follow a Uniform(0,1) distribution, which would result in a p-value histogram where the right take is fairly flat as in the Hedenfalk p-values.  U-shaped p-value histograms can indicate that a one-sided test was performed on data where there is signal in both directions, or it can indicate that there is dependence among the variables in the data.  In the latter case, we suggest considering the {\tt sva} Bioconductor package. In either case, it is usually possible to compute the p-values using a different model or method that will yield p-values that better match the underlying assumptions of the methods implemented in this package.
+The ``U-shaped'' p-value histogram is a red flag. An important assumption behind the estimation performed in this package is that null p-values follow a Uniform(0,1) distribution, which would result in a p-value histogram where the right tail is fairly flat as in the Hedenfalk et al. p-values.  U-shaped p-value histograms can indicate that a one-sided test was performed on data where there is signal in both directions, or it can indicate that there is dependence among the variables in the data.  In the latter case, we suggest considering the {\tt sva} Bioconductor package. In either case, it is usually possible to compute the p-values using a different model or method that will yield p-values that better match the underlying assumptions of the methods implemented in this package.
 
 
-\subsection{Calculating q-values}
+\subsection{The {\tt qvalue} function}
 Once you’ve examined the distribution of the p-values and confirmed they are well-behaved, the function {\tt qvalue} can be used to calculate the q-values:
 
 <<run_qvalue, dependson="load_qvalue">>=
 qobj <- qvalue(p = hedenfalk$p)
 @
 
-Several arguments can be used in the function {\tt qvalue}. The following lists the main arguments:
+Several arguments can be used in the function {\tt qvalue}:
 
 \begin{itemize}
 \item {\tt p}: A vector of p-values. This is the only necessary input.
-\item {\tt lambda}: The values of the tuning parameter to be considered in estimating $\pi_0$. These must be in [0,1] and are set to lambda=seq(0, 0.95, 0.05) by default. Optional; see Storey (2002) \cite{storey:2002} for more information.
-\item {\tt pi0.method}: Either ``smoother'' or ``bootstrap''; the method for automatically choosing tuning parameter lambda in the estimate of $\pi_0$. If the lambda argument above is only given one value, then this option is ignored. The default option is ``smoother''.
 \item {\tt fdr.level}: The level at which to control the false discovery rate. Optional; if this is selected, a vector of TRUE and FALSE is returned in the {\tt fdr.level} slot that specifies whether each q-value is less than fdr.level or not. 
 \item {\tt pfdr}: An indicator of whether it is desired to make the estimate more robust  for small p-values. This uses the point estimate of ``positive false discovery rate'' (pFDR). Optional; see Storey (2002) \cite{storey:2002} for more information.
+\item {\tt ...}: Arguments passed to the functions {\tt pi0est} and {\tt lfdr}, which can include:
+\begin{itemize}
+\item {\tt lambda} (passed to {\tt pi0est}): The values of the tuning parameter to be considered in estimating $\pi_0$. These must be in [0,1] and are set to {\tt lambda=seq(0, 0.95, 0.05)} by default. 
+\item {\tt pi0.method}  (passed to {\tt pi0est}): Either {\tt "smoother"} or {\tt "bootstrap"}; the method for automatically handling the tuning parameter in the estimation of $\pi_0$.
+\item {\tt trunc} (passed to {\tt lfdr}): If {\tt TRUE}, local FDR estimates $>1$ are set to 1. Default is {\tt TRUE}.
+\end{itemize}
 \end{itemize}
 
-The user has the most influence on choosing how to estimate $\pi_0$, the overall proportion of true null hypotheses, via {\tt lambda} and {\tt pi0.method}. If no options are selected, then by default the smoother method ({\tt pi0.method = "smoother"}) proposed in Storey and Tibshirani (2003) \cite{storey:tibs:2003} is used. This is recommended over the bootstrap method, but can be unpredictable for a small number of p-values or in pathological situations. An alternative less susceptible to these scenarios is the bootstrap method ({\tt pi0.method = "bootstrap"}) proposed in Storey, Taylor \& Siegmund (2004) \cite{storey:etal:2004}. 
+The user has the most influence on choosing how to estimate $\pi_0$, the overall proportion of true null hypotheses, via {\tt lambda} and {\tt pi0.method}. If no options are selected, then by default the smoother method ({\tt pi0.method = "smoother"}) proposed in Storey and Tibshirani (2003) \cite{storey:tibs:2003} is used. An alternative is the bootstrap method ({\tt pi0.method = "bootstrap"}) proposed in Storey, Taylor \& Siegmund (2004) \cite{storey:etal:2004}. 
 
 If one selects {\tt lambda=0} (which estimates $\pi_0$ as 1) and {\tt fdr.level = 0.05}, then this produces a list of significant tests equivalent to the Benjamini and Hochberg (1995) \cite{benjamini:hochberg:1995} methodology at level $\alpha = 0.05$ (where, of course, $0.05$ can be substituted for any number in $(0,1]$). This can be viewed as a special conservative case of the Storey (2002) \cite{storey:2002} methodology. 
 
-\subsection{The {\tt qvalue} object}
-Running the function {\tt qvalue} in the previous section returns a {\tt qvalue} object. A {\tt qvalue} object can be summarized by using the {\tt summary} function:
+\subsubsection{The {\tt qvalue} object}
 
-<<summary_qvalue, dependson="run_qvalue">>=
-summary(qobj)
-@
-
-The summary provides a nice way of viewing the $\pi_{0}$ estimate and the number of significant tests at various cutoffs for different metrics. The cutoffs printed in the {\tt summary} function can be controlled by changing the {\tt cuts} argument.
-
-The object contains several fields:
+The object contains several relevant fields:
 <<outNames, dependson="run_qvalue">>=
 names(qobj)
 @
-A description of each is described below.
 \begin{itemize}
 \item {\tt call}: The function call.
 \item {\tt pi0}: An estimate of the proportion of null p-values.
 \item {\tt qvalues}: A vector of the estimated q-values.
 \item {\tt pvalues}: A vector of the original p-values.
 \item {\tt lfdr}: A vector of estimated local FDR values.
-\item {\tt significant}: If fdr.level is specified, and indicator of whether the q-value fell below fdr.level (taking all such q-values to be significant controls FDR at level fdr.level).
+\item {\tt significant}: If fdr.level is specified, and indicator of whether the estimated q-value fell below {\tt fdr.level} (taking all such q-values to be significant controls FDR at level {\tt fdr.level}).
 \item {\tt pi0.lambda}: An estimate of the proportion of null p-values at each {\tt lambda} value.
 \item {\tt lambda}: A vector of {\tt lambda} values utilized in forming a set of $\pi_{0}$ estimates.
 \end{itemize}
 
-One important number that is obtained with the software is an estimate of the overall proportion of true null hypotheses, $\pi_0$:
+\subsubsection{Summarizing results} 
+Running the function {\tt qvalue} in the previous section returns a {\tt qvalue} object. A qvalue object can be summarized by using the {\tt summary} function:
+
+<<summary_qvalue, dependson="run_qvalue">>=
+summary(qobj)
+@
+
+The {\tt summary} function provides a nice way of viewing the $\pi_{0}$ estimate and the number of significant genes at various cutoffs for different metrics. The cutoffs printed in the {\tt summary} function can be controlled by changing the {\tt cuts} argument.
+
+\subsubsection{The $\pi_{0}$ estimate}
+
+One very important statistic that is obtained with the software is an estimate of the overall proportion of true null hypotheses, $\pi_0$:
 
 <<pi0, dependson="run_qvalue">>=
 pi0 <- qobj$pi0
 @
 
-An estimate of the proportion of true alternative tests is one minus this number. This can be a useful number to know, even if all the truly significant tests cannot all be explicitly identified. 
+An estimate of the proportion of true alternative tests is one minus this number. This is quite a useful number to know, even if all the truly significant tests cannot all be explicitly identified. If the $\pi_{0}$ estimate is the statistic of interest, the function {\tt pi0est} can be used directly:
 
-Another important estimate that is returned is the local FDR:
-
-<<lfdr, dependson="run_qvalue">>=
-lfdr <- qobj$lfdr
+<<pi0est, dependson="load_qvalue">>=
+pi0 <- pi0est(p = hedenfalk$p, lambda = seq(0.1, 0.9, 0.1), pi0.method = "smoother" )
+names(pi0)
 @
 
- 
- The p-values, estimated q-values, and estimated local FDR values can also be respectively listed by the following commands:
+The {\tt pi0} slot provides the overall $\pi_{0}$ estimate, {\tt pi0.lambda} are the estimated proportion of null p-values at each {\tt lambda} values, and {\tt pi0.smooth} are the estimated proportion of null p-values at each {\tt lambda} from the spline fit.
 
-<<getVals, dependson="run_qvalue">>=
-pvalues <- qobj$pvalues
+\subsubsection{The q-values}
+The q-value is the minimum FDR incurred when calling a test significant. The q-values can be extracted from the {\tt qvalue} object by:
+
+<<qvalue_ext, dependson="run_qvalue", fig.height=4>>=
 qvalues <- qobj$qvalues
-local_FDR <- qobj$lfdr
 @
 
-Each entry of {\tt qobj\$qvalues} is an estimate of the respective test's q-value, which measures the proportion of false positives incurred (called the false discovery rate) when that particular test is called significant.  Calling all tests significant with q-value $\leq \alpha$ controls the FDR at level $\alpha$.  Each entry of {\tt qobj\$lfdr} is an estimate of the posterior probability that the null hypothesis is true given the test's p-value, called the local FDR.
+We advocate reporting the estimated q-value for each test. However, sometimes one wants to estimate the FDR incurred for a given p-value cut-off, or estimate the p-value cut-off required to control the FDR at a certain level. For example, if one wants to estimate the false discovery rate when calling all p-values $\leq$ 0.01 significant, then type:
+<<tmp, dependson=c("qvalue_ext", "run_qvalue")>>=
+max(qvalues[qobj$pvalues <= 0.01])
+@
+
+This calculates the maximum estimated q-value among all p-values $\leq$ 0.01, which is equivalent to estimating the false discovery rate when calling all p-values $\leq$ 0.01 significant. When considering all p-values $\leq 1$, the maximum q-value will be the estimate of $\pi_{0}$. This is because the best estimate of the false discovery rate, when considering all tests, will be the estimate of the rejection region. 
+
+If one wants to control the false discovery rate at a pre-determined level $\alpha$, then calling all tests significant with estimated q-values $\leq\alpha$ accomplishes this under certain mathematical assumptions, including some cases where the p-values are dependent (\cite{storey:etal:2004}). If {\tt fdr.level} is set to $\alpha$ in {\tt qvalue}, then a vector indicating whether each q-value is $\leq$ $\alpha$ can be obtained by:
+<<fdrlevel, dependson="run_qvalue", eval=FALSE>>=
+qobj_fdrlevel <- qvalue(p = hedenfalk$p, fdr.level=0.1)
+qobj$significant
+@
+The more likely case is that one will want to investigate the overall behavior of the estimated q-values before making such a decision.
+
+\subsubsection{The local false discovery rates}
+The local FDR is a useful counterpart to the q-values (\cite{Storey2011}). The estimated local FDR of a given test is an empirical Bayesian posterior probability that the null hypothesis is true, conditional on the observed p-value. To extract the local FDR estimates, type: 
+<<lfdr, dependson="run_qvalue">>=
+localFDR <- qobj$lfdr
+@
+
+The function {\tt lfdr} can be used to calculate the local FDR estimates directly:
+<<lfdr_f, dependson="load_qvalue">>=
+localFDR <- lfdr(p = hedenfalk$p)
+@
+
+When calling {\tt lfdr} directly, the user can provide a {\tt pi0} value if desired.  If no {\tt pi0} value is given, then {\tt pi0est} is called, and arguments can be passed to {\tt pi0est} via the {\tt ...} argument in {\tt lfdr}.  Type {\tt ?lfdr} for further details on the various inputs for the {\tt lfdr} function.
 
 \subsection{Visualizing results}
-The {\tt hist} or {\tt plot} function can be used to visualize the final results. The function {\tt plot} allows one to view several useful plots:
+The {\tt hist} and {\tt plot} functions can be used to visualize the results from {\tt qvalue}. The function {\tt plot} allows one to view several useful plots:
 \begin{itemize}
 \item The estimated $\pi_{0}$ versus the tuning parameter $\lambda$
 \item The q-values versus the p-values
@@ -200,16 +266,17 @@ The {\tt hist} or {\tt plot} function can be used to visualize the final results
 \end{itemize}
 
 Applying {\tt plot} to the {\tt hedenfalk} {\tt qvalue} object, we get: 
-<<plot_qobj, dependson=c("load_qvalue", "run_qvalue"), fig.height=4>>=
+<<plot_qobj, dependson=c("load_qvalue", "run_qvalue"), fig.width='\textwidth'>>=
 plot(qobj)
 @
 
-The main purpose of the first plot is to gauge the reliability of the $\pi_{0}$. The tuning parameter $\lambda$ has to be deal with in order to obtain an overall estimate of $\pi_{0}$. The variable $\lambda$ is called {\tt lambda} in the package; it can be fixed or automatically chosen. The estimated $\pi_{0}$ is plotted versus the tuning parameter $\lambda$. As $\lambda$ gets larger, the bias of the estimate decreases, yet the variance increases. See Storey (2002) \cite{storey:2002} for more on this. Comparing your final estimate of $\pi_{0}$ to this plot gives a good sense as to its quality. A smoother is fit to the plot in order to elucidate the trend of the estimates. The remaining plots show how many tests are significant, as well as how many false positives to expect for each q-value cut-off. 
+The main purpose of the upper-left plot is to gauge the reliability of the $\pi_{0}$ estimate, where the estimated $\pi_{0}$ is plotted versus the tuning parameter $\lambda$. The variable $\lambda$ is called {\tt lambda} in the package; it can be fixed or automatically handled.  As $\lambda$ gets larger, the bias of the estimate decreases, yet the variance increases. When {\tt pi0.method = "smoother"} is utilized, the fitted smoother is also shown in this plot.  See Storey (2002) \cite{storey:2002} for more on $\lambda$ and its role in estimating $\pi_0$. Comparing your final estimate of $\pi_{0}$ to this plot gives a good sense as to its quality. 
 
+The remaining plots show how many tests are significant, as well as how many false positives to expect for each q-value cut-off. 
 
 Additionally, running {\tt hist} on a q-value object can be used to view the histogram of p-values along with line plots of both q-values and local FDR values versus the p-values:
 
-<<hist_qobj, dependson=c("load_qvalue", "run_qvalue"), fig.height=4>>=
+<<hist_qobj, dependson=c("load_qvalue", "run_qvalue"), fig.width='\textwidth'>>=
 hist(qobj)
 @
 
@@ -223,10 +290,16 @@ A \href{http://shiny.rstudio.com}{Shiny} implementation of the package written b
 First, the q-value is not an ``adjusted p-values'' {\em per se}, but rather a population quantity with an explicit definition.  The package produces estimates of q-values and the local FDR, both of which are very different from p-values.  The package does not perform a Bonferroni correction on p-values, which returns ``adjusted p-values'' that are larger than the original p-values.  Second, the maximum possible q-value is $\pi_0$, the proportion of true null hypotheses.  The maximum possible p-value is 1.  When considering a large number of hypothesis tests where there is a nontrivial fraction of true alternative p-values, we will have both an estimate $\pi_0 < 1$ and we will have some large p-values close to 1.   Therefore, the maximal estimated q-value will be less than or equal to the estimated $\pi_0$ but there will also be a number of p-values larger than the estimated $\pi_0$.  It must be the case then that at some point p-values become larger than estimated q-values.  This is expected and it is not a bug.
 \end{quote}
 
+\section{Obtaining updates on {\tt qvalue}}
+The easiest way to obtain the most recent (development) version of {\tt qvalue} is to visit \url{https://github.com/jdstorey/qvalue/}.  Bug fixes will appear on GitHub earlier than on Bioconductor, and suggested changes can also be made there.
+
+
 \section*{Acknowledgements}
 This software development has been supported in part by funding from the National Institutes of Health.
 
-\bibliographystyle{acm}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{acm}
+\bibliographystyle{unsrt}
 \bibliography{qvaluerefs} 
 
 \end{document}
