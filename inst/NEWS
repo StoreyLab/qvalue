@@ -1,6 +1,9 @@
-qvalue 1.99.0: 
+qvalue 1.99.z: 
 This update of the qvalue package includes:
-(i) the use of ggplot2 in the plotting functions
-(ii) an updated vignette
-(iii) vectorizing sections of the code 
-(iv) function name changes
+- removal of tcltk usage
+- the use of ggplot2 in the plotting functions
+- an updated vignette
+- vectorizing sections of the code 
+- function name changes
+- inclusion of local FDR estimation
+
