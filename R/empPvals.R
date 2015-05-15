@@ -83,7 +83,7 @@ empPvals <- function(stat, stat0, pool = TRUE) {
     } else if (nrow(stat0) != m){
       stop("Number of rows of stat0 must equal length of stat.")
     }
-    stat0 <- (stat0 - matrix(stat, nrow = m, ncol = n)) >= 0
+    stat0 <- (stat0 - stat) >= 0
     p <- rowMeans(stat0)
     p <- pmax(p, 1 / ncol(stat0))
   }
