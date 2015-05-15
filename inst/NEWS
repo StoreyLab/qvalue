@@ -1,4 +1,7 @@
-qvalue 1.99.z: 
+qvalue 2.0.1:
+The package now handles NA values.
+
+qvalue 2.0.0: 
 This update of the qvalue package includes:
 - removal of tcltk usage
 - the use of ggplot2 in the plotting functions
