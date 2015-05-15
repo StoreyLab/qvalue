@@ -57,6 +57,9 @@
 lfdr <- function(p, pi0 = NULL, trunc = TRUE, monotone = TRUE,
                  transf = c("probit", "logit"), adj = 1.5, eps = 10 ^ -8, ...) {
   # Check inputs
+  lfdr_out <- p
+  rm_na <- !is.na(p)
+  p <- p[rm_na]
   if (min(p) < 0 || max(p) > 1) {
     stop("P-values not in valid range [0,1].")
   } else if (is.null(pi0)) {
@@ -92,6 +95,7 @@ lfdr <- function(p, pi0 = NULL, trunc = TRUE, monotone = TRUE,
       }
     }
     lfdr <- lfdr[rank(p)]
-  }  
-  return(lfdr)
+  }
+  lfdr_out[rm_na] <- lfdr
+  return(lfdr_out)
 }

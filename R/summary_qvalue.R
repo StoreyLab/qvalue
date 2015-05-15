@@ -64,9 +64,13 @@ summary.qvalue <- function (object, cuts = c(0.0001, 0.001, 0.01, 0.025, 0.05, 0
   # Number of significant values for p-value, q-value and local FDR
   cat("Cumulative number of significant calls:\n")
   cat("\n")
-  counts <- sapply(cuts, function(x) c("p-value"=sum(object$pvalues < x),
-                  "q-value"=sum(object$qvalues < x), 
-                  "local FDR"=sum(object$lfdr < x)))
+  rm_na <- !is.na(object$pvalues)
+  pvalues <- object$pvalues[rm_na]
+  qvalues <- object$qvalues[rm_na]
+  lfdr <- object$lfdr[rm_na]
+  counts <- sapply(cuts, function(x) c("p-value"=sum(pvalues < x),
+                  "q-value"=sum(qvalues < x), 
+                  "local FDR"=sum(lfdr < x)))
   colnames(counts) <- paste("<", cuts, sep="")
   print(counts)
   cat("\n")

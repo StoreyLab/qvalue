@@ -54,10 +54,14 @@
 #' @export
 hist.qvalue <- function(x, ...) {
   pi00 <- round(x$pi0, 3)
+  rm_na <- !is.na(x$pvalues)
+  pvalues <- x$pvalues[rm_na]
+  qvalues <- x$qvalues[rm_na]
+  lfdr <- x$lfdr[rm_na]
   # Initilizations
-  d <- data.frame(pvals = x$pvalues[order(x$pvalues)], 
-                  qvals = x$qvalues[order(x$pvalues)],
-                  lfdr = x$lfdr[order(x$pvalues)],
+  d <- data.frame(pvals = pvalues, 
+                  qvals = qvalues,
+                  lfdr = lfdr,
                   pi0 = pi00)
   dm <- melt(d, id.vars = "pvals")
   # Histogram figure

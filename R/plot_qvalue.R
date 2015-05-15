@@ -86,11 +86,14 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
   #                  significant tests 
   # Initilizations
   plot.call <- match.call()
-  q.ord <- x$qval[order(x$pval)]
+  rm_na <- !is.na(x$pvalues)
+  pvalues <- x$pvalues[rm_na]
+  qvalues <- x$qvalues[rm_na]
+  q.ord <- qvalues[order(pvalues)]
   if (min(q.ord) > rng[2]) {
     rng <- c(min(q.ord), quantile(q.ord, 0.1))
   }
-  p.ord <- x$pval[order(x$pval)]
+  p.ord <- pvalues[order(pvalues)]
   lambda <- x$lambda
   pi0Smooth <- x$pi0.smooth
   if (length(lambda) == 1) {

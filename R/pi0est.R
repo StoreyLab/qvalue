@@ -76,9 +76,11 @@
 #' @keywords pi0est, proportion true nulls
 #' @aliases pi0est
 #' @export
-pi0est <- function(p = NULL, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "bootstrap"), 
+pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "bootstrap"), 
                    smooth.df = 3, smooth.log.pi0 = FALSE, ...) {
   # Check input arguments
+  rm_na <- !is.na(p)
+  p <- p[rm_na]
   pi0.method = match.arg(pi0.method)
   m <- length(p)
   lambda <- sort(lambda) # guard against user input
@@ -131,4 +133,3 @@ pi0est <- function(p = NULL, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoot
   return(list(pi0 = pi0, pi0.lambda = pi0.lambda, 
               lambda = lambda, pi0.smooth = pi0Smooth))
 }
-

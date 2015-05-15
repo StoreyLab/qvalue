@@ -79,8 +79,11 @@
 #' @aliases qvalue
 #' @import splines ggplot2 grid reshape2
 #' @export
-qvalue <- function(p = NULL, fdr.level = NULL, pfdr = FALSE, ...) {
+qvalue <- function(p, fdr.level = NULL, pfdr = FALSE, ...) {
   # Argument checks
+  p_in <- qvals_out <- lfdr_out <- p
+  rm_na <- !is.na(p)
+  p <- p[rm_na]
   if (min(p) < 0 || max(p) > 1) {
     stop("p-values not in valid range [0, 1].")
   } else if (!is.null(fdr.level) && (fdr.level <= 0 || fdr.level > 1)) {
@@ -103,20 +106,21 @@ qvalue <- function(p = NULL, fdr.level = NULL, pfdr = FALSE, ...) {
   for (i in (m - 1):1) {
     qvals[u[i]] <- min(qvals[u[i]], qvals[u[i + 1]])
   }
-
+  qvals_out[rm_na] <- qvals 
   # Calculate local FDR estimates  
   lfdr <- lfdr(p = p, pi0 = pi0s$pi0, ...)
+  lfdr_out[rm_na] <- lfdr
   
   # Return results
   if (!is.null(fdr.level)) {
-    retval <- list(call = match.call(), pi0 = pi0s$pi0, qvalues = qvals,
-                   pvalues = p, lfdr = lfdr, fdr.level = fdr.level, 
+    retval <- list(call = match.call(), pi0 = pi0s$pi0, qvalues = qvals_out,
+                   pvalues = p_in, lfdr = lfdr_out, fdr.level = fdr.level, 
                    significant = (qvals <= fdr.level),
                    pi0.lambda = pi0s$pi0.lambda, lambda = pi0s$lambda, 
                    pi0.smooth = pi0s$pi0.smooth)
   } else {
-    retval <- list(call = match.call(), pi0 = pi0s$pi0, qvalues = qvals, 
-                   pvalues = p, lfdr = lfdr, pi0.lambda = pi0s$pi0.lambda, 
+    retval <- list(call = match.call(), pi0 = pi0s$pi0, qvalues = qvals_out, 
+                   pvalues = p_in, lfdr = lfdr_out, pi0.lambda = pi0s$pi0.lambda, 
                    lambda = pi0s$lambda, pi0.smooth = pi0s$pi0.smooth)
   }
   class(retval) <- "qvalue"
