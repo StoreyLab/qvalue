@@ -125,25 +125,25 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
                 annotate("text", label = paste("hat(pi)[0] ==", pi00),
 				                 x = min(lambda, 1) + (max(lambda) - min(lambda))/20, 
 				                 y = x$pi0 - (max(pi0) - min(pi0))/20, 
-                         parse = TRUE, size = 3)
+                         parse = TRUE, size = 3) + theme_bw() + scale_color_brewer(palette = "Set1")
   p2 <- ggplot(data.frame(pvalue = p.ord[q.ord >= rng[1] & q.ord <= rng[2]],
                           qvalue = q.ord[q.ord >= rng[1] & q.ord <= rng[2]]), 
                           aes_string(x = 'pvalue', y = 'qvalue')) + 
                xlab("p-value") +
                ylab("q-value")  + 
-               geom_line()
+               geom_line()+ theme_bw()
   p3 <- ggplot(data.frame(qCuttOff = q.ord[q.ord >= rng[1] & q.ord <= rng[2]],
                           sig=(1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])), 
                           aes_string(x = 'qCuttOff', y = 'sig')) + 
                xlab("q-value cut-off") + 
                ylab("significant tests")  + 
-               geom_line()
+               geom_line()+ theme_bw()
   p4 <- ggplot(data.frame(sig = (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2]),
                           expFP = q.ord[q.ord >= rng[1] & q.ord <= rng[2]] * 
                                 (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])),
                           aes_string(x = 'sig', y = 'expFP')) + 
                xlab("significant tests") + 
                ylab("expected false positives")  + 
-               geom_line()
+               geom_line()+ theme_bw()
   multiplot(p1, p2, p3, p4, cols = 2)
 }

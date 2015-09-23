@@ -1,5 +1,6 @@
 qvalue 2.0.1:
-The package now handles NA values.
+- handles NA values
+- changed plotting functions
 
 qvalue 2.0.0: 
 This update of the qvalue package includes:
@@ -9,4 +10,3 @@ This update of the qvalue package includes:
 - vectorizing sections of the code 
 - function name changes
 - inclusion of local FDR estimation
-

@@ -70,18 +70,19 @@ hist.qvalue <- function(x, ...) {
          geom_histogram(aes_string(y = '..density..'), colour = "black", 
                         fill = "white", binwidth = 0.04) +
          coord_cartesian(xlim = c(0, 1)) +
-         geom_line(aes_string(x = 'pvals', y = 'value',
-                              linetype = 'variable')) + 
+         geom_line(aes_string(x = 'pvals', y = 'value', color = 'variable', linetype = 'variable'), size = 1.1) + 
          scale_linetype_manual(name  = "Variables", 
-                               values = c("lfdr"=4,"qvals"=1, "pi0"=5),
+                               values = c("lfdr"=1,"qvals"=1, "pi0"=5),
                                labels=c("q-values", "local FDR", 
-                                        bquote(hat(pi)[0]==.(pi00))))+
+                                        bquote(hat(pi)[0]==.(pi00)))) +
+   #   scale_size_manual(values=c(1.2, 1.2, 2.2))+
          annotate("text", label = paste("hat(pi)[0] ==", pi00), x = 0.90, 
                   y = pi00 + .1, parse = TRUE, size = 3.0, colour = "black" ) +
-         scale_colour_discrete(name  = "Variables",
-                          breaks=c("qvals", "lfdr", "pi0"),
-                          labels=c("q-values", "local FDR", 
-                                   bquote(hat(pi)[0]==.(pi00)))) +
+    #     scale_colour_discrete(name  = "Variables",
+    #                      breaks=c("qvals", "lfdr", "pi0"),
+    #                      labels=c("q-values", "local FDR", 
+    #                               bquote(hat(pi)[0]==.(pi00)))) +
          xlab("p-value") + 
-         ylab("density")           
+         ylab("density")  + theme_bw() +
+  scale_colour_manual(name = "Variables", values=c("red","blue","black") , breaks=c("qvals", "lfdr", "pi0"), labels=c("q-values", "local FDR",bquote(hat(pi)[0]==.(pi00))))
 }
