@@ -3,13 +3,8 @@ Type: Package
 Title: Q-value estimation for false discovery rate control
 Version: 1.99.1
 Date: 2015-03-24
-Authors@R: c(
-    person("John", "Storey", email = "jstorey@princeton.edu", role = c("aut", "cre")),
-    person("Andrew", "Bass", email = "ajbass@princeton.edu", role = c("ctb")),
-    person("Alan", "Dabney", email = "adabney@stat.tamu.edu", role = c("ctb")),
-    person("David", "Robinson", email = "admiral.david@gmail.com", role = "ctb")
-    )
-Maintainer: John D. Storey <jstorey@princeton.edu>
+Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and David Robinson
+Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass <ajbass@princeton.edu>
 biocViews: MultipleComparisons
 Description: This package takes a list of p-values resulting from the
         simultaneous testing of many hypotheses and estimates their
