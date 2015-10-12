@@ -1,6 +1,6 @@
-qvalue 2.0.1:
+qvalue 2.1.1:
 - handles NA values
-- changed plotting functions
+- upgraded plotting functions
 
 qvalue 2.0.0: 
 This update of the qvalue package includes:
