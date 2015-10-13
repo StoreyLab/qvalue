@@ -2,7 +2,7 @@ Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
 Version: 2.1.1
-Date: 2015-03-24
+Date: 2015-10-12
 Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and David Robinson
 Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass <ajbass@princeton.edu>
 biocViews: MultipleComparisons
@@ -23,5 +23,5 @@ VignetteBuilder: knitr
 Imports: splines, ggplot2, grid, reshape2
 Suggests: knitr
 Depends: R(>= 2.10)
-URL: http://qvalue.princeton.edu/, http://github.com/jdstorey/qvalue
+URL: http://github.com/jdstorey/qvalue
 License: LGPL
