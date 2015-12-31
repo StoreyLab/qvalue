@@ -7,20 +7,20 @@
 #' @param na String to use when there are missing values.
 #' @param row.names logical. Specify whether row names are to be printed.
 #' @param col.names logical. Specify whether column names are to be printed.
-#'   
+#'
 #' @details The output file includes: (i) p-values, (ii)
 #' q-values (iii) local FDR values, and (iv) the estimate of \eqn{\pi_0}{pi_0},
 #' one per line. If an FDR significance
 #' level was specified in the call to \code{\link{qvalue}}, the significance
 #' level is printed and an indicator of significance is included.
-#' 
+#'
 #' @return Nothing of interest.
-#' 
-#' @examples 
+#'
+#' @examples
 #' # import data
 #' data(hedenfalk)
 #' p <- hedenfalk$p
-#'  
+#'
 #' # write q-value object
 #' qobj <- qvalue(p)
 #' write.qvalue(qobj, file="myresults.txt")
@@ -30,7 +30,7 @@
 #' @aliases write.qvalue
 #' @keywords write.qvalue
 #' @export
-write.qvalue <- function(x, file = NULL, sep = " ", eol = "\n", na = "NA", 
+write.qvalue <- function(x, file = NULL, sep = " ", eol = "\n", na = "NA",
                          row.names = FALSE, col.names = TRUE) {
   if (class(x) != "qvalue") {
     stop("x must be a qvalue object.")
@@ -45,7 +45,7 @@ write.qvalue <- function(x, file = NULL, sep = " ", eol = "\n", na = "NA",
     write.table(as.matrix(d), file = file, sep = sep, eol = eol, na = na,
                 row.names = row.names, col.names = col.names)
   } else {
-    write.table(as.matrix(d), file = file, sep = sep, eol = eol, na = na, 
+    write.table(as.matrix(d), file = file, sep = sep, eol = eol, na = na,
                 row.names = row.names, col.names = col.names)
   }
 }

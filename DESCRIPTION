@@ -3,25 +3,34 @@ Type: Package
 Title: Q-value estimation for false discovery rate control
 Version: 2.1.1
 Date: 2015-10-12
-Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and David Robinson
-Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass <ajbass@princeton.edu>
+Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and
+    David Robinson
+Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass
+    <ajbass@princeton.edu>
 biocViews: MultipleComparisons
 Description: This package takes a list of p-values resulting from the
-        simultaneous testing of many hypotheses and estimates their
-        q-values and local FDR values. The q-value of a test measures 
-        the proportion of false positives incurred (called the false 
-        discovery rate) when that particular test is called significant. 
-        The local FDR measures the posterior probability the null 
-        hypothesis is true given the test's p-value. Various plots
-        are automatically generated, allowing one to make sensible
-        significance cut-offs. Several mathematical results have
-        recently been shown on the conservative accuracy of the
-        estimated q-values from this software. The software can be
-        applied to problems in genomics, brain imaging, astrophysics,
-        and data mining.
+    simultaneous testing of many hypotheses and estimates their
+    q-values and local FDR values. The q-value of a test measures
+    the proportion of false positives incurred (called the false
+    discovery rate) when that particular test is called significant.
+    The local FDR measures the posterior probability the null
+    hypothesis is true given the test's p-value. Various plots
+    are automatically generated, allowing one to make sensible
+    significance cut-offs. Several mathematical results have
+    recently been shown on the conservative accuracy of the
+    estimated q-values from this software. The software can be
+    applied to problems in genomics, brain imaging, astrophysics,
+    and data mining.
 VignetteBuilder: knitr
-Imports: splines, ggplot2, grid, reshape2
-Suggests: knitr
-Depends: R(>= 2.10)
+Imports:
+    splines,
+    ggplot2,
+    grid,
+    reshape2
+Suggests:
+    knitr
+Depends:
+    R(>= 2.10)
 URL: http://github.com/jdstorey/qvalue
 License: LGPL
+RoxygenNote: 5.0.1

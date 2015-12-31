@@ -2,9 +2,9 @@
 #' @description
 #'  Graphical display of the q-value object
 #'
-#'  @param x A q-value object.
-#'  @param rng Range of q-values to show. Optional
-#'  @param \ldots Additional arguments. Currently unused.
+#' @param x A q-value object.
+#' @param rng Range of q-values to show. Optional
+#' @param \ldots Additional arguments. Currently unused.
 #'
 #' @details
 #' The function plot allows one to view several plots:
@@ -16,14 +16,14 @@
 #'  \item The number of expected false positives versus the number of
 #'  significant tests.
 #'  }
-#'  
+#'
 #' This function makes four plots. The first is a plot of the
 #' estimate of \eqn{\pi_0}{pi_0} versus its tuning parameter
-#' \eqn{\lambda}{lambda}. In most cases, as \eqn{\lambda}{lambda} 
-#' gets larger, the bias of the estimate decreases, yet the variance 
-#' increases. Various methods exist for balancing this bias-variance 
-#' trade-off (Storey 2002, Storey & Tibshirani 2003, Storey, Taylor 
-#' & Siegmund 2004). Comparing your estimate of \eqn{\pi_0}{pi_0} to this 
+#' \eqn{\lambda}{lambda}. In most cases, as \eqn{\lambda}{lambda}
+#' gets larger, the bias of the estimate decreases, yet the variance
+#' increases. Various methods exist for balancing this bias-variance
+#' trade-off (Storey 2002, Storey & Tibshirani 2003, Storey, Taylor
+#' & Siegmund 2004). Comparing your estimate of \eqn{\pi_0}{pi_0} to this
 #' plot allows one to guage its quality. The remaining three plots
 #' show how many tests are called significant and how many false
 #' positives to expect for each q-value cut-off. A thorough discussion of
@@ -38,14 +38,14 @@
 #' \url{http://onlinelibrary.wiley.com/doi/10.1111/1467-9868.00346/abstract}
 #'
 #' Storey JD and Tibshirani R. (2003) Statistical significance for
-#' genome-wide experiments. Proceedings of the National Academy of Sciences, 
+#' genome-wide experiments. Proceedings of the National Academy of Sciences,
 #' 100: 9440-9445. \cr
 #' \url{http://www.pnas.org/content/100/16/9440.full}
 #'
 #' Storey JD. (2003) The positive false discovery rate: A Bayesian
 #' interpretation and the q-value. Annals of Statistics, 31: 2013-2035. \cr
 #' \url{http://projecteuclid.org/DPubS/Repository/1.0/Disseminate?view=body&id=pdf_1&handle=euclid.aos/1074290335}
-#'  
+#'
 #' Storey JD, Taylor JE, and Siegmund D. (2004) Strong control,
 #' conservative point estimation, and simultaneous conservative
 #' consistency of false discovery rates: A unified approach. Journal of
@@ -54,14 +54,14 @@
 #'
 #' Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of Statistical Science}. \cr
 #' \url{http://genomine.org/papers/Storey_FDR_2011.pdf} \cr
-#' \url{http://www.springer.com/statistics/book/978-3-642-04897-5} 
+#' \url{http://www.springer.com/statistics/book/978-3-642-04897-5}
 #'
 #' @examples
 #' # import data
 #' data(hedenfalk)
 #' p <- hedenfalk$p
-#' qobj <- qvalue(p) 
-#'  
+#' qobj <- qvalue(p)
+#'
 #" # view plots for q-values between 0 and 0.3:
 #' plot(qobj, rng=c(0.0, 0.3))
 #'
@@ -70,7 +70,7 @@
 #' @keywords plot
 #' @aliases plot, plot.qvalue
 #' @export
-plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) { 
+plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
   # Plotting function for q-object.
   #
   # Args:
@@ -83,7 +83,7 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
   #     Upper-right: q-values versus p-values
   #     Lower-left: number of significant tests per each q-value cut-off
   #     Lower-right: number of expected false positives versus number of
-  #                  significant tests 
+  #                  significant tests
   # Initilizations
   plot.call <- match.call()
   rm_na <- !is.na(x$pvalues)
@@ -99,7 +99,7 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
   if (length(lambda) == 1) {
     lambda <- sort(unique(c(lambda, seq(0, max(0.90, lambda), 0.05))))
   }
-  pi0 <- x$pi0.lambda  
+  pi0 <- x$pi0.lambda
   pi00 <- round(x$pi0, 3)
   pi0.df <- data.frame(lambda = lambda, pi0 = pi0)
   # Spline fit- pi0Smooth NULL implies bootstrap
@@ -107,43 +107,43 @@ plot.qvalue <- function(x, rng = c(0.0, 0.1), ...) {
     p1.smooth <- NULL
   } else {
     spi0.df <- data.frame(lambda = lambda, pi0 = pi0Smooth)
-    p1.smooth <- geom_line(data = spi0.df, aes_string(x = 'lambda', y = 'pi0'), 
+    p1.smooth <- geom_line(data = spi0.df, aes_string(x = 'lambda', y = 'pi0'),
                            colour="red")
-  }        
+  }
   # Subplots
   p1 <-  ggplot(pi0.df, aes_string(x = 'lambda', y = 'pi0')) +
-                geom_point() + 
+                geom_point() +
                 p1.smooth +
                 geom_abline(intercept = pi00,
-                            slope = 0, 
-                            lty = 2, 
+                            slope = 0,
+                            lty = 2,
                             colour = "red",
-                            size = .6) + 
-                xlab(expression(lambda)) + 
-                ylab(expression(hat(pi)[0](lambda))) + 
+                            size = .6) +
+                xlab(expression(lambda)) +
+                ylab(expression(hat(pi)[0](lambda))) +
                 xlim(min(lambda) - .05, max(lambda) + 0.05) +
                 annotate("text", label = paste("hat(pi)[0] ==", pi00),
-				                 x = min(lambda, 1) + (max(lambda) - min(lambda))/20, 
-				                 y = x$pi0 - (max(pi0) - min(pi0))/20, 
+				                 x = min(lambda, 1) + (max(lambda) - min(lambda))/20,
+				                 y = x$pi0 - (max(pi0) - min(pi0))/20,
                          parse = TRUE, size = 3) + theme_bw() + scale_color_brewer(palette = "Set1")
   p2 <- ggplot(data.frame(pvalue = p.ord[q.ord >= rng[1] & q.ord <= rng[2]],
-                          qvalue = q.ord[q.ord >= rng[1] & q.ord <= rng[2]]), 
-                          aes_string(x = 'pvalue', y = 'qvalue')) + 
+                          qvalue = q.ord[q.ord >= rng[1] & q.ord <= rng[2]]),
+                          aes_string(x = 'pvalue', y = 'qvalue')) +
                xlab("p-value") +
-               ylab("q-value")  + 
+               ylab("q-value")  +
                geom_line()+ theme_bw()
   p3 <- ggplot(data.frame(qCuttOff = q.ord[q.ord >= rng[1] & q.ord <= rng[2]],
-                          sig=(1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])), 
-                          aes_string(x = 'qCuttOff', y = 'sig')) + 
-               xlab("q-value cut-off") + 
-               ylab("significant tests")  + 
+                          sig=(1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])),
+                          aes_string(x = 'qCuttOff', y = 'sig')) +
+               xlab("q-value cut-off") +
+               ylab("significant tests")  +
                geom_line()+ theme_bw()
   p4 <- ggplot(data.frame(sig = (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2]),
-                          expFP = q.ord[q.ord >= rng[1] & q.ord <= rng[2]] * 
+                          expFP = q.ord[q.ord >= rng[1] & q.ord <= rng[2]] *
                                 (1 + sum(q.ord < rng[1])):sum(q.ord <= rng[2])),
-                          aes_string(x = 'sig', y = 'expFP')) + 
-               xlab("significant tests") + 
-               ylab("expected false positives")  + 
+                          aes_string(x = 'sig', y = 'expFP')) +
+               xlab("significant tests") +
+               ylab("expected false positives")  +
                geom_line()+ theme_bw()
   multiplot(p1, p2, p3, p4, cols = 2)
 }

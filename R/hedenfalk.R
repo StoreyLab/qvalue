@@ -2,54 +2,54 @@
 #' @aliases hedenfalk
 #' @title P-values and test-statistics from the Hedenfalk et al. (2001) gene
 #'   expression dataset
-#'   
+#'
 #' @usage data(hedenfalk)
-#' 
+#'
 #' @description The data from the breast cancer gene expression study of
 #' Hedenfalk et al. (2001) were obtained and analyzed. A comparison was made
 #' between 3,226 genes of two mutation types, BRCA1 (7 arrays) and BRCA2 (8
 #' arrays). The data included here are p-values, test-statistics, and
 #' permutation null test-statistics obtained from a two-sample t-test analysis
 #' on a set of 3170 genes, as described in Storey and Tibshirani (2003).
-#' 
-#' @return A list called \code{hendfalk} containing: 
+#'
+#' @return A list called \code{hendfalk} containing:
 #' \item{p}{Vector of 3,170
-#' p-values of tests comparing BRCA1 to BRCA2.} 
+#' p-values of tests comparing BRCA1 to BRCA2.}
 #' \item{stat}{Vector of 3,170
-#' absolute two-sample t-statistics comparing BRCA1 to BRCA2.} 
+#' absolute two-sample t-statistics comparing BRCA1 to BRCA2.}
 #' \item{stat0}{A
 #' 3,170 by 100 matrix of absolute two-sample t-statistics from 100 independent
 #' permutations of the BRCA1 and BRCA2 labels; the row \code{stat0[i,].}
 #' contains the permutation statistics corresponding to observed statistic
 #' \code{stat[i]}.}
-#' 
+#'
 #' @references
-#' Hedenfalk I et al. (2001). Gene expression profiles in hereditary breast cancer. 
+#' Hedenfalk I et al. (2001). Gene expression profiles in hereditary breast cancer.
 #' New England Journal of Medicine, 344: 539-548.
-#' 
-#' Storey JD and Tibshirani R. (2003). Statistical significance for genome-wide 
+#'
+#' Storey JD and Tibshirani R. (2003). Statistical significance for genome-wide
 #' studies. Proceedings of the National Academy of Sciences, 100: 9440-9445. \cr
 #' \url{http://www.pnas.org/content/100/16/9440.full}
-#' 
+#'
 #' @seealso \code{\link{qvalue}}, \code{\link{empPvals}}
 #' @examples
 #' # import data
 #' data(hedenfalk)
 #' stat <- hedenfalk$stat
 #' stat0 <- hedenfalk$stat0 #vector from null distribution
-#' 
-#" # calculate p-values 
+#'
+#" # calculate p-values
 #' p.pooled <- empPvals(stat=stat, stat0=stat0)
 #' p.testspecific <- empPvals(stat=stat, stat0=stat0, pool=FALSE)
-#' 
+#'
 #' #compare pooled to test-specific p-values
 #' qqplot(p.pooled, p.testspecific); abline(0,1)
-#'   
+#'
 #' # calculate q-values and view results
 #' qobj <- qvalue(p.pooled)
 #' summary(qobj)
 #' hist(qobj)
 #' plot(qobj)
-#' 
+#'
 #' @keywords dataset, hedenfalk
 NULL
