@@ -31,6 +31,6 @@ Suggests:
     knitr
 Depends:
     R(>= 2.10)
-URL: http://github.com/jdstorey/qvalue
+URL: http://github.com/StoreyLab/qvalue
 License: LGPL
 RoxygenNote: 5.0.1
