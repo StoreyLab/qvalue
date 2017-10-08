@@ -58,9 +58,6 @@ p.testspecific <- empPvals(stat=stat, stat0=stat0, pool=FALSE)
 qqplot(p.pooled, p.testspecific); abline(0,1)
 
 }
-\author{
-John D. Storey
-}
 \references{
 Storey JD and Tibshirani R. (2003) Statistical significance for
   genome-wide experiments. Proceedings of the National Academy of Sciences,
@@ -74,5 +71,7 @@ Storey JD and Tibshirani R. (2003) Statistical significance for
 \seealso{
 \code{\link{qvalue}}
 }
+\author{
+John D. Storey
+}
 \keyword{pvalues}
-

@@ -102,8 +102,10 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
     pi0 <- min(pi0, 1)
     pi0Smooth <- NULL
   } else {
-    pi0 <- sapply(lambda, function(l) mean(p >= l) / (1 - l))
-    pi0.lambda <- pi0
+      ind <- length(lambda):1
+      pi0 <- cumsum(tabulate(findInterval(p, vec=lambda))[ind]) / (length(p) * (1-lambda[ind]))
+      pi0 <- pi0[ind]
+      pi0.lambda <- pi0
     # Smoother method approximation
     if (pi0.method == "smoother") {
       if (smooth.log.pi0) {

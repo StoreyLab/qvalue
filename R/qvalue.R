@@ -19,7 +19,11 @@
 #' whether each q-value is less than fdr.level or not.
 #' @param pfdr An indicator of whether it is desired to make the
 #' estimate more robust for small p-values and a direct finite sample estimate of pFDR -- optional.
+#' @param lfdr.out If TRUE then local false discovery rates are returned. Default is TRUE.
+#' @param pi0 It is recommended to not input an estimate of pi0. Experienced users can use their own methodology to estimate
+#' the proportion of true nulls or set it equal to 1 for the BH procedure.
 #' @param \ldots Additional arguments passed to \code{\link{pi0est}} and \code{\link{lfdr}}.
+#' 
 #'
 #' @return
 #' A list of object type "qvalue" containing:
@@ -80,7 +84,7 @@
 #' @import splines ggplot2 reshape2
 #' @importFrom grid grid.newpage pushViewport viewport grid.layout
 #' @export
-qvalue <- function(p, fdr.level = NULL, pfdr = FALSE, ...) {
+qvalue <- function(p, fdr.level = NULL, pfdr = FALSE, lfdr.out = TRUE, pi0 = NULL, ...) {
   # Argument checks
   p_in <- qvals_out <- lfdr_out <- p
   rm_na <- !is.na(p)
@@ -92,25 +96,35 @@ qvalue <- function(p, fdr.level = NULL, pfdr = FALSE, ...) {
   }
 
   # Calculate pi0 estimate
-  pi0s <- pi0est(p, ...)
+  if (is.null(pi0)) {
+    pi0s <- pi0est(p, ...)
+  } else {
+    if (pi0 > 0 && pi0 <= 1)  {
+    pi0s = list()
+    pi0s$pi0 = pi0
+    } else {
+      stop("pi0 is not (0,1]")
+    }
+  }
 
   # Calculate q-value estimates
   m <- length(p)
-  u <- order(p)
-  v <- rank(p, ties.method="max")
+  i <- m:1L
+  o <- order(p, decreasing = TRUE)
+  ro <- order(o)
   if (pfdr) {
-    qvals <- (pi0s$pi0 * m * p) / (v * (1 - (1 - p) ^ m))
+    qvals <- pi0s$pi0 * pmin(1, cummin(p[o] * m / (i * (1 - (1 - p[o]) ^ m))))[ro]
   } else {
-    qvals <- (pi0s$pi0 * m * p) / v
-  }
-  qvals[u[m]] <- min(qvals[u[m]], 1)
-  for (i in (m - 1):1) {
-    qvals[u[i]] <- min(qvals[u[i]], qvals[u[i + 1]])
+    qvals <- pi0s$pi0 * pmin(1, cummin(p[o] * m /i ))[ro]
   }
   qvals_out[rm_na] <- qvals
   # Calculate local FDR estimates
-  lfdr <- lfdr(p = p, pi0 = pi0s$pi0, ...)
-  lfdr_out[rm_na] <- lfdr
+  if (lfdr.out) {
+    lfdr <- lfdr(p = p, pi0 = pi0s$pi0, ...)
+    lfdr_out[rm_na] <- lfdr
+  } else {
+    lfdr_out <- NULL
+  }
 
   # Return results
   if (!is.null(fdr.level)) {

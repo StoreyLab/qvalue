@@ -63,9 +63,6 @@ hist(qobj)
 plot(qobj)
 
 }
-\author{
-John D. Storey
-}
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal
 of the Royal Statistical Society, Series B, 64: 479-498. \cr
@@ -92,8 +89,10 @@ Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of 
 \seealso{
 \code{\link{qvalue}}
 }
+\author{
+John D. Storey
+}
 \keyword{nulls}
 \keyword{pi0est,}
 \keyword{proportion}
 \keyword{true}
-
