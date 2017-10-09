@@ -89,9 +89,9 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
   if (min(p) < 0 || max(p) > 1) {
     stop("ERROR: p-values not in valid range [0, 1].")
   } else if (ll > 1 && ll < 4) {
-    stop(cat("ERROR:", paste("length(lambda)=", ll, ".", sep=""),
+    stop(sprintf(paste("ERROR:", paste("length(lambda)=", ll, ".", sep=""),
              "If length of lambda greater than 1,",
-             "you need at least 4 values."))
+             "you need at least 4 values.")))
   } else if (min(lambda) < 0 || max(lambda) >= 1) {
     stop("ERROR: Lambda must be within [0, 1).")
   }
