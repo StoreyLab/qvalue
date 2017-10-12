@@ -88,13 +88,9 @@ lfdr <- function(p, pi0 = NULL, trunc = TRUE, monotone = TRUE,
     lfdr[lfdr > 1] <- 1
   }
   if (monotone) {
-    lfdr <- lfdr[order(p)]
-    for (i in 2:n) {
-      if (lfdr[i] < lfdr[i - 1]) {
-        lfdr[i] <- lfdr[i - 1]
-      }
-    }
-    lfdr <- lfdr[rank(p)]
+    o <- order(p, decreasing = FALSE)
+    ro <- order(o)
+    lfdr <- cummax(lfdr[o])[ro]
   }
   lfdr_out[rm_na] <- lfdr
   return(lfdr_out)

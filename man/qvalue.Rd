@@ -4,7 +4,8 @@
 \alias{qvalue}
 \title{Estimate the q-values for a given set of p-values}
 \usage{
-qvalue(p, fdr.level = NULL, pfdr = FALSE, ...)
+qvalue(p, fdr.level = NULL, pfdr = FALSE, lfdr.out = TRUE, pi0 = NULL,
+  ...)
 }
 \arguments{
 \item{p}{A vector of p-values (only necessary input).}
@@ -15,6 +16,11 @@ whether each q-value is less than fdr.level or not.}
 
 \item{pfdr}{An indicator of whether it is desired to make the
 estimate more robust for small p-values and a direct finite sample estimate of pFDR -- optional.}
+
+\item{lfdr.out}{If TRUE then local false discovery rates are returned. Default is TRUE.}
+
+\item{pi0}{It is recommended to not input an estimate of pi0. Experienced users can use their own methodology to estimate
+the proportion of true nulls or set it equal to 1 for the BH procedure.}
 
 \item{\ldots}{Additional arguments passed to \code{\link{pi0est}} and \code{\link{lfdr}}.}
 }
@@ -58,9 +64,6 @@ qobj <- qvalue(p, lambda=0.5, pfdr=TRUE)
 qobj <- qvalue(p, fdr.level=0.05, pi0.method="bootstrap", adj=1.2)
 
 }
-\author{
-John D. Storey
-}
 \references{
 Storey JD. (2002) A direct approach to false discovery rates. Journal
 of the Royal Statistical Society, Series B, 64: 479-498. \cr
@@ -88,5 +91,7 @@ Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of 
 \code{\link{pi0est}}, \code{\link{lfdr}}, \code{\link{summary.qvalue}},
 \code{\link{plot.qvalue}}, \code{\link{hist.qvalue}}, \code{\link{write.qvalue}}
 }
+\author{
+John D. Storey
+}
 \keyword{qvalue}
-

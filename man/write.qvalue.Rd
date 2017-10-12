@@ -44,12 +44,11 @@ p <- hedenfalk$p
 qobj <- qvalue(p)
 write.qvalue(qobj, file="myresults.txt")
 }
-\author{
-John D. Storey, Andrew J. Bass
-}
 \seealso{
 \code{\link{qvalue}}, \code{\link{plot.qvalue}},
   \code{\link{summary.qvalue}}
 }
+\author{
+John D. Storey, Andrew J. Bass
+}
 \keyword{write.qvalue}
-

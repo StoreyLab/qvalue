@@ -1,8 +1,8 @@
 Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
-Version: 2.1.1
-Date: 2015-10-12
+Version: 2.8.1
+Date: 2017-10-07
 Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and
     David Robinson
 Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass
@@ -33,4 +33,4 @@ Depends:
     R(>= 2.10)
 URL: http://github.com/StoreyLab/qvalue
 License: LGPL
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

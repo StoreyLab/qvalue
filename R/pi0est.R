@@ -89,9 +89,9 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
   if (min(p) < 0 || max(p) > 1) {
     stop("ERROR: p-values not in valid range [0, 1].")
   } else if (ll > 1 && ll < 4) {
-    stop(cat("ERROR:", paste("length(lambda)=", ll, ".", sep=""),
+    stop(sprintf(paste("ERROR:", paste("length(lambda)=", ll, ".", sep=""),
              "If length of lambda greater than 1,",
-             "you need at least 4 values."))
+             "you need at least 4 values.")))
   } else if (min(lambda) < 0 || max(lambda) >= 1) {
     stop("ERROR: Lambda must be within [0, 1).")
   }
@@ -102,8 +102,10 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
     pi0 <- min(pi0, 1)
     pi0Smooth <- NULL
   } else {
-    pi0 <- sapply(lambda, function(l) mean(p >= l) / (1 - l))
-    pi0.lambda <- pi0
+      ind <- length(lambda):1
+      pi0 <- cumsum(tabulate(findInterval(p, vec=lambda))[ind]) / (length(p) * (1-lambda[ind]))
+      pi0 <- pi0[ind]
+      pi0.lambda <- pi0
     # Smoother method approximation
     if (pi0.method == "smoother") {
       if (smooth.log.pi0) {

@@ -53,9 +53,6 @@ qobj = qvalue(p)
 hist(qobj)
 
 }
-\author{
-John D. Storey
-}
 \references{
 Efron B, Tibshirani R, Storey JD, and Tisher V. (2001) Empirical Bayes analysis
 of a microarray experiment. Journal of the American Statistical Association, 96: 1151-1160. \cr
@@ -72,9 +69,11 @@ Storey JD. (2011) False discovery rates. In \emph{International Encyclopedia of 
 \seealso{
 \code{\link{qvalue}}, \code{\link{pi0est}}, \code{\link{hist.qvalue}}
 }
+\author{
+John D. Storey
+}
 \keyword{Discovery}
 \keyword{False}
 \keyword{Rate,}
 \keyword{lfdr}
 \keyword{local}
-
