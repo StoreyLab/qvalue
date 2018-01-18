@@ -95,6 +95,11 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
   } else if (min(lambda) < 0 || max(lambda) >= 1) {
     stop("ERROR: Lambda must be within [0, 1).")
   }
+  
+  if (max(p) < max(lambda)) {
+   stop("ERROR: maximum p-value is smaller than lambda range. Change the range of lambda or use qvalue_truncp() for truncated p-values.") 
+  }
+  
   # Determines pi0
   if (ll == 1) {
     pi0 <- mean(p >= lambda)/(1 - lambda)
