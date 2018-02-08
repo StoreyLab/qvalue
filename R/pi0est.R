@@ -135,7 +135,9 @@ pi0est <- function(p, lambda = seq(0.05,0.95,0.05), pi0.method = c("smoother", "
     }
   }
   if (pi0 <= 0) {
-    stop("ERROR: The estimated pi0 <= 0. Check that you have valid p-values or use a different range of lambda.")
+      warning("The estimated pi0 <= 0. Setting the pi0 estimate to be 1. Check that you have valid p-values or use a different range of lambda.")
+      pi0 <- pi0.lambda <- 1
+      pi0Smooth <- lambda <- 0
   }
   return(list(pi0 = pi0, pi0.lambda = pi0.lambda,
               lambda = lambda, pi0.smooth = pi0Smooth))
