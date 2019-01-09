@@ -1,10 +1,15 @@
 Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
-Version: 2.10.1
+Version: 2.10.2
 Date: 2017-10-07
-Author: John D. Storey with contributions from Andrew J. Bass, Alan Dabney and
-    David Robinson
+Authors@R: as.person(c(
+    "John D. Storey <jdstorey@princeton.edu> [aut, cre]", 
+    "Andrew J. Bass <ajbass@princeton.edu> [aut]", 
+    "Alan Dabney [aut]",
+    "David Robinson [aut]",
+    "Gregory Warnes [ctb]"
+  ))
 Maintainer: John D. Storey <jstorey@princeton.edu>, Andrew J. Bass
     <ajbass@princeton.edu>
 biocViews: MultipleComparisons
