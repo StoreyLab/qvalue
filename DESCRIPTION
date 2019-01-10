@@ -1,7 +1,7 @@
 Package: qvalue
 Type: Package
 Title: Q-value estimation for false discovery rate control
-Version: 2.10.2
+Version: 2.15.0
 Date: 2017-10-07
 Authors@R: as.person(c(
     "John D. Storey <jdstorey@princeton.edu> [aut, cre]", 
