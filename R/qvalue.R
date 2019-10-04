@@ -96,6 +96,9 @@ qvalue <- function(p, fdr.level = NULL, pfdr = FALSE, lfdr.out = TRUE, pi0 = NUL
   } else if (!is.null(fdr.level) && (fdr.level <= 0 || fdr.level > 1)) {
     stop("'fdr.level' must be in (0, 1].")
   }
+  if ( max(p) < 0.5 && is.null(pi0) ) {
+    stop("p-values are truncated and pi0 not set. Try running BH procedure by setting pi0 = 1")
+  } 
 
   # Calculate pi0 estimate
   if (is.null(pi0)) {
