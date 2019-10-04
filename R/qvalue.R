@@ -13,7 +13,9 @@
 #' will be utilized in the internal calls made in \code{\link{qvalue}}. See \url{http://genomine.org/papers/Storey_FDR_2011.pdf}
 #' for a brief introduction to FDRs and q-values.
 #'
-#' @param p A vector of p-values (only necessary input).
+#' @param p A vector of p-values (only necessary input). Note that qvalue expects that these values are uniformly distributed 
+#' on [0,1), and under default parameter values will throw an error. If your p-value distribution is truncated, qvalue will 
+#' run with the BH procedure by setting pi0 = 1.
 #' @param fdr.level A level at which to control the FDR. Must be in (0,1]. Optional; if this is
 #' selected, a vector of TRUE and FALSE is returned that specifies
 #' whether each q-value is less than fdr.level or not.
