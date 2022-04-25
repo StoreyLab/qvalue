@@ -13,7 +13,7 @@ One may then ask: "If I draw a significance threshold somewhere along this list,
 
 The qvalue package forms various estimates that allow one to answer these and other questions.  The quantity of interest is the false discovery rate -- sometimes abbreviated as FDR -- which is roughly defined to be the expected proportion of false discoveries (also known as false positives) among all tests that are called significant.  
 
-An overview of the FDR and its well-established methods and theory may be found in Storey (2011) (preprint freely available [here](http://genomine.org/papers/Storey_FDR_2011.pdf)).  We recommend reading the package vignette for users of qvalue who want a quick start and are unfamiliar with FDR, q-value, and local FDR estimation.
+An overview of the FDR and its well-established methods and theory may be found in Storey (2011) (preprint freely available [here](http://genomics.princeton.edu/storeylab/papers/Storey_FDR_2011.pdf)).  We recommend reading the package vignette for users of qvalue who want a quick start and are unfamiliar with FDR, q-value, and local FDR estimation.
 
 
 Installation and documentation
