@@ -31,7 +31,8 @@ Imports:
     splines,
     ggplot2,
     grid,
-    reshape2
+    reshape2,
+    stats
 Suggests:
     knitr
 Depends:
