@@ -29,6 +29,7 @@
 #'   \code{\link{summary.qvalue}}
 #' @aliases write.qvalue
 #' @keywords write.qvalue
+#' @importFrom utils write.table
 #' @export
 write.qvalue <- function(x, file = NULL, sep = " ", eol = "\n", na = "NA",
                          row.names = FALSE, col.names = TRUE) {
